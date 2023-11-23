@@ -50,8 +50,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(
                   child: IconButton(
                     iconSize: 20,
-                    icon: Image.asset('images/breakfast.png',
-                        fit: BoxFit.fitWidth),
+                    icon: Image.asset(
+                      'images/breakfast.png',
+                      width: 500,
+                      height: 100,
+                    ),
                     onPressed: () {},
                   ),
                 ),
@@ -64,8 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(
                   child: IconButton(
                     iconSize: 20,
-                    icon: Image.asset('images/breakfast.png',
-                        fit: BoxFit.scaleDown),
+                    icon:
+                        Image.asset('images/lunch.png', fit: BoxFit.scaleDown),
                     onPressed: () {},
                   ),
                 ),
@@ -78,8 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(
                   child: IconButton(
                     iconSize: 20,
-                    icon: Image.asset('images/breakfast.png',
-                        fit: BoxFit.contain),
+                    icon: Image.asset('images/dinner.png', fit: BoxFit.contain),
                     onPressed: () {},
                   ),
                 ),
