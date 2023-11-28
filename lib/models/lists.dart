@@ -4,28 +4,28 @@ import 'food.dart';
 class DeliciousChoices extends ChangeNotifier {
   final List<Food> _breakfastMenu = [
     Food(
-      name: "Eggs with Beans",
-      imagePath: "thepath",
+      name: "Scrambled Eggs with Beans",
+      imagePath: "images/food/scrambled_eggs_with_beans.png",
     ),
     Food(
       name: "Coffee w/ Waffles",
-      imagePath: "thepath",
+      imagePath: "images/food/coffee_with_waffles.png",
     ),
     Food(
       name: "Coffee w/ Muffin",
-      imagePath: "thepath",
+      imagePath: "images/food/coffee_with_muffin.png",
     ),
     Food(
       name: "Taquitos",
-      imagePath: "thepath",
+      imagePath: "images/food/breakfast_taquitos.png",
     ),
     Food(
       name: "Pancakes",
-      imagePath: "thepath",
+      imagePath: "images/food/pancakes.png",
     ),
     Food(
       name: "Yogurt Parfait",
-      imagePath: "thepath",
+      imagePath: "images/food/yogurt_parfait.png",
     ),
   ];
 

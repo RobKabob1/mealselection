@@ -1,5 +1,8 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mealselection/breakfast.dart';
+import 'package:mealselection/models/lists.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key, required this.title});
@@ -11,8 +14,39 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // void randomFoodSource(context) {
+  //   int randomIndex;
+  //   String randomName;
+
+  //   setState() {
+  //     final items = context.read<DeliciousChoices>();
+  //     final breakfastMenu = items.breakfastMenu;
+  //     randomIndex = Random().nextInt(breakfastMenu.length);
+  //     randomName = breakfastMenu[randomIndex].name.toString();
+  //     print("home: $randomName");
+  //   }
+  //   //select a random item for the initial load
+  // }
+
+  // @override
+  // // ignore: must_call_super
+  // initState() {
+  //   // ignore: avoid_print
+  //   print("initState Called");
+  //   randomFoodSource(context);
+  // }
+
   @override
   Widget build(BuildContext context) {
+    //build a random choice
+    final items = context.read<DeliciousChoices>();
+    final breakfastMenu = items.breakfastMenu;
+    final randomIndex = Random().nextInt(breakfastMenu.length);
+    setState(() {
+      randomIndex;
+      print("home: $randomIndex");
+    });
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -36,7 +70,9 @@ class _HomeState extends State<Home> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Breakfast(),
+                        builder: (context) => Breakfast(
+                          food: breakfastMenu[randomIndex],
+                        ),
                       ),
                     );
                   },

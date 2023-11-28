@@ -1,24 +1,45 @@
 //import 'dart:math';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mealselection/components/food_tile.dart';
+import 'package:mealselection/models/food.dart';
 import 'package:mealselection/models/lists.dart';
 import 'package:provider/provider.dart';
 
 class Breakfast extends StatefulWidget {
-  const Breakfast({super.key});
+  final Food food;
+  const Breakfast({super.key, required this.food});
 
   @override
   State<Breakfast> createState() => _BreakfastState();
 }
 
 class _BreakfastState extends State<Breakfast> {
-  void navigateToFoodDetails(int index) {}
+  void randomFoodSource() {
+    final items = context.read<DeliciousChoices>();
+    final breakfastMenu = items.breakfastMenu;
+    int randomIndex;
+    String randomName;
+
+    setState(() {
+      randomIndex = Random().nextInt(breakfastMenu.length);
+      randomName = breakfastMenu[randomIndex].name.toString();
+      print("home: $randomName");
+    });
+    //select a random item for the initial load
+  }
 
   @override
   Widget build(BuildContext context) {
     //get the breakfast menu
     final items = context.read<DeliciousChoices>();
     final breakfastMenu = items.breakfastMenu;
+
+    //select a random item for the initial load
+    int randomIndex = Random().nextInt(breakfastMenu.length);
+    var randomName = breakfastMenu[randomIndex].name.toString();
+    print("breakfast: $randomName");
 
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +55,7 @@ class _BreakfastState extends State<Breakfast> {
               children: [
                 Expanded(
                   child: Image.asset(
-                    'images/food/breakfast_taquitos.png',
+                    widget.food.imagePath,
                     height: 200,
                     fit: BoxFit.fitWidth,
                   ),
@@ -44,12 +65,12 @@ class _BreakfastState extends State<Breakfast> {
             const SizedBox(height: 10),
             Row(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 3,
                   child: Text(
-                    "bob",
+                    widget.food.name,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                     ),
                   ),
@@ -72,7 +93,7 @@ class _BreakfastState extends State<Breakfast> {
                 itemCount: breakfastMenu.length,
                 itemBuilder: (context, index) => FoodTile(
                   food: breakfastMenu[index],
-                  onTap: () => navigateToFoodDetails(index),
+                  onTap: () {},
                 ),
               ),
             ),
