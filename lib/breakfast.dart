@@ -16,30 +16,19 @@ class Breakfast extends StatefulWidget {
 }
 
 class _BreakfastState extends State<Breakfast> {
-  void randomFoodSource() {
-    final items = context.read<DeliciousChoices>();
-    final breakfastMenu = items.breakfastMenu;
-    int randomIndex;
-    String randomName;
-
-    setState(() {
-      randomIndex = Random().nextInt(breakfastMenu.length);
-      randomName = breakfastMenu[randomIndex].name.toString();
-      print("home: $randomName");
-    });
-    //select a random item for the initial load
-  }
-
   @override
   Widget build(BuildContext context) {
     //get the breakfast menu
     final items = context.read<DeliciousChoices>();
     final breakfastMenu = items.breakfastMenu;
-
-    //select a random item for the initial load
-    int randomIndex = Random().nextInt(breakfastMenu.length);
-    var randomName = breakfastMenu[randomIndex].name.toString();
-    print("breakfast: $randomName");
+    //choose a random item
+    final randomIndex = Random().nextInt(breakfastMenu.length);
+    String randomName = breakfastMenu[randomIndex].name.toString();
+    print("breakfast updated: $randomName");
+    //set State with that random item
+    setState(() {
+      randomIndex;
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -79,7 +68,17 @@ class _BreakfastState extends State<Breakfast> {
                   flex: 1,
                   child: IconButton(
                     icon: const Icon(Icons.refresh),
-                    onPressed: () {},
+                    onPressed: () {
+                      // randomFoodSource();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Breakfast(
+                            food: breakfastMenu[randomIndex],
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
