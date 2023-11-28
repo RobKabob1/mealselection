@@ -91,7 +91,16 @@ class _BreakfastState extends State<Breakfast> {
                 itemCount: breakfastMenu.length,
                 itemBuilder: (context, index) => FoodTile(
                   food: breakfastMenu[index],
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Breakfast(
+                          food: breakfastMenu[index],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
