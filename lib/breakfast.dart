@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mealselection/lists.dart';
 
 class Breakfast extends StatefulWidget {
   const Breakfast({super.key});
@@ -8,7 +9,8 @@ class Breakfast extends StatefulWidget {
 }
 
 class _BreakfastState extends State<Breakfast> {
-  final items = List<String>.generate(10, (i) => 'Item $i');
+  // final items = List<String>.generate(10, (i) => 'Item $i');
+  final items = breakfastList;
 
   @override
   Widget build(BuildContext context) {
