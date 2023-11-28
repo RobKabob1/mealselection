@@ -1,10 +1,10 @@
-var breakfastList = [
-  "Eggs with Beans",
-  "Coffee w/ Waffles",
-  "Coffee w/ Muffin",
-  "Taquitos",
-  "Pancakes",
-  "Yogurt Parfait",
+List<Map> breakfastList = [
+  {"id": "1", "name": "Eggs with Beans", "path": "thepath"},
+  {"id": "2", "name": "Coffee w/ Waffles", "path": "thepath"},
+  {"id": "3", "name": "Coffee w/ Muffin", "path": "thepath"},
+  {"id": "4", "name": "Taquitos", "path": "thepath"},
+  {"id": "5", "name": "Pancakes", "path": "thepath"},
+  {"id": "6", "name": "Yogurt Parfait", "path": "thepath"},
 ];
 
 var lunchList = [

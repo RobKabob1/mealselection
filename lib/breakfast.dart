@@ -55,15 +55,18 @@ class _BreakfastState extends State<Breakfast> {
               ],
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: items.length,
-                prototypeItem: ListTile(
-                  title: Text(items.first),
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const Divider(
+                  color: Colors.grey,
                 ),
+                itemCount: items.length,
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text(
-                      items[index],
+                      items[index]["name"],
+                    ),
+                    subtitle: Text(
+                      items[index]["path"],
                     ),
                   );
                 },
