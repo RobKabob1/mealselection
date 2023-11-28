@@ -18,54 +18,57 @@ class _BreakfastState extends State<Breakfast> {
         title: const Text('Breakfast'),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Image.asset('images/breakfast_taquitos.png'),
-              ),
-            ],
-          ),
-          const Row(
-            children: [
-              Expanded(
-                child: Text(
-                  'Breakfast Taquitos',
-                  textAlign: TextAlign.center,
+      body: Container(
+        decoration: BoxDecoration(color: Colors.grey[350]),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Image.asset('images/breakfast_taquitos.png'),
                 ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {},
-                  child: const Text('Another Random'),
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: items.length,
-              prototypeItem: ListTile(
-                title: Text(items.first),
-              ),
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    items[index],
-                  ),
-                );
-              },
+              ],
             ),
-          ),
-        ],
+            const Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'Breakfast Taquitos',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Another Random'),
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: items.length,
+                prototypeItem: ListTile(
+                  title: Text(items.first),
+                ),
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      items[index],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

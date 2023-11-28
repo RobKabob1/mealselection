@@ -19,59 +19,65 @@ class _HomeState extends State<Home> {
         title: Text(widget.title),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //breakfast
-            Row(
-              children: [
-                Expanded(
-                  child: IconButton(
-                    iconSize: 20,
-                    icon: Image.asset(
-                      'images/breakfast.png',
-                      width: 500,
-                      height: 100,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Breakfast(),
-                        ),
-                      );
-                    },
+      body: Container(
+        decoration: BoxDecoration(color: Colors.grey[350]),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //breakfast
+              Expanded(
+                child: IconButton(
+                  iconSize: 20,
+                  icon: Image.asset(
+                    'images/breakfast.png',
                   ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Breakfast(),
+                      ),
+                    );
+                  },
                 ),
-              ],
-            ),
-            //lunch
-            Row(
-              children: [
-                Expanded(
-                  child: IconButton(
-                    iconSize: 20,
-                    icon:
-                        Image.asset('images/lunch.png', fit: BoxFit.scaleDown),
-                    onPressed: () {},
+              ),
+              //lunch
+              Expanded(
+                child: IconButton(
+                  iconSize: 20,
+                  icon: Image.asset('images/lunch.png'),
+                  onPressed: () {},
+                ),
+              ),
+              //dinner
+              Expanded(
+                child: IconButton(
+                  iconSize: 20,
+                  icon: Image.asset('images/dinner.png'),
+                  onPressed: () {},
+                ),
+              ),
+              //restaurants
+              Expanded(
+                child: IconButton(
+                  iconSize: 20,
+                  icon: Image.asset(
+                    'images/restaurants.png',
                   ),
+                  onPressed: () {},
                 ),
-              ],
-            ),
-            //dinner
-            Row(
-              children: [
-                Expanded(
-                  child: IconButton(
-                    iconSize: 20,
-                    icon: Image.asset('images/dinner.png', fit: BoxFit.contain),
-                    onPressed: () {},
-                  ),
+              ),
+              //snacks
+              Expanded(
+                child: IconButton(
+                  iconSize: 20,
+                  icon: Image.asset('images/snacks.png'),
+                  onPressed: () {},
                 ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
