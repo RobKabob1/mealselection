@@ -27,33 +27,37 @@ class _BreakfastState extends State<Breakfast> {
             Row(
               children: [
                 Expanded(
-                  child: Image.asset('images/breakfast_taquitos.png'),
+                  child: Image.asset(
+                    'images/breakfast_taquitos.png',
+                    height: 200,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
               ],
             ),
-            const Row(
+            const SizedBox(height: 10),
+            Row(
               children: [
-                Expanded(
+                const Expanded(
+                  flex: 3,
                   child: Text(
                     'Breakfast Taquitos',
                     textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 20),
+                    style: TextStyle(
+                      fontSize: 25,
                     ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                    icon: const Icon(Icons.refresh),
                     onPressed: () {},
-                    child: const Text('Another Random'),
                   ),
                 ),
               ],
             ),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView.separated(
                 separatorBuilder: (context, index) => const Divider(
