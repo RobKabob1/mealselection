@@ -4,6 +4,7 @@ import 'package:mealselection/breakfast.dart';
 import 'package:mealselection/dinner.dart';
 import 'package:mealselection/lunch.dart';
 import 'package:mealselection/models/lists.dart';
+import 'package:mealselection/restaurants.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -23,10 +24,12 @@ class _HomeState extends State<Home> {
     final randomBreakfastIndex = Random().nextInt(items.breakfastMenu.length);
     final randomLunchIndex = Random().nextInt(items.lunchMenu.length);
     final randomDinnerIndex = Random().nextInt(items.dinnerMenu.length);
+    final randomRestaurantIndex = Random().nextInt(items.restaurantList.length);
     setState(() {
       randomBreakfastIndex;
       randomLunchIndex;
       randomDinnerIndex;
+      randomRestaurantIndex;
     });
 
     return Scaffold(
@@ -101,7 +104,16 @@ class _HomeState extends State<Home> {
                   icon: Image.asset(
                     'images/screens/restaurants.png',
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Restaurants(
+                          food: items.restaurantList[randomRestaurantIndex],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               //snacks
