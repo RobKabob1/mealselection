@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
     final randomIndex = Random().nextInt(breakfastMenu.length);
     setState(() {
       randomIndex;
-      print("home: $randomIndex");
+      //print("home: $randomIndex");
     });
 
     return Scaffold(

@@ -23,8 +23,8 @@ class _BreakfastState extends State<Breakfast> {
     final breakfastMenu = items.breakfastMenu;
     //choose a random item
     final randomIndex = Random().nextInt(breakfastMenu.length);
-    String randomName = breakfastMenu[randomIndex].name.toString();
-    print("breakfast updated: $randomName");
+    //String randomName = breakfastMenu[randomIndex].name.toString();
+    //print("breakfast updated: $randomName");
     //set State with that random item
     setState(() {
       randomIndex;
@@ -69,7 +69,6 @@ class _BreakfastState extends State<Breakfast> {
                   child: IconButton(
                     icon: const Icon(Icons.refresh),
                     onPressed: () {
-                      // randomFoodSource();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
