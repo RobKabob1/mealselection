@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mealselection/breakfast.dart';
+import 'package:mealselection/dinner.dart';
 import 'package:mealselection/lunch.dart';
 import 'package:mealselection/models/lists.dart';
 import 'package:provider/provider.dart';
@@ -15,37 +16,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // void randomFoodSource(context) {
-  //   int randomIndex;
-  //   String randomName;
-
-  //   setState() {
-  //     final items = context.read<DeliciousChoices>();
-  //     final breakfastMenu = items.breakfastMenu;
-  //     randomIndex = Random().nextInt(breakfastMenu.length);
-  //     randomName = breakfastMenu[randomIndex].name.toString();
-  //     print("home: $randomName");
-  //   }
-  //   //select a random item for the initial load
-  // }
-
-  // @override
-  // // ignore: must_call_super
-  // initState() {
-  //   // ignore: avoid_print
-  //   print("initState Called");
-  //   randomFoodSource(context);
-  // }
-
   @override
   Widget build(BuildContext context) {
     //build a random choice
     final items = context.read<DeliciousChoices>();
     final randomBreakfastIndex = Random().nextInt(items.breakfastMenu.length);
     final randomLunchIndex = Random().nextInt(items.lunchMenu.length);
+    final randomDinnerIndex = Random().nextInt(items.dinnerMenu.length);
     setState(() {
       randomBreakfastIndex;
-      //print("home: $randomIndex");
+      randomLunchIndex;
+      randomDinnerIndex;
     });
 
     return Scaffold(
@@ -101,7 +82,16 @@ class _HomeState extends State<Home> {
                 child: IconButton(
                   iconSize: 20,
                   icon: Image.asset('images/screens/dinner.png'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Dinner(
+                          food: items.dinnerMenu[randomDinnerIndex],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               //restaurants

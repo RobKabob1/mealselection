@@ -1,6 +1,4 @@
-//import 'dart:math';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:mealselection/components/food_tile.dart';
 import 'package:mealselection/models/food.dart';
