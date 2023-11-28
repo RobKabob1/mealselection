@@ -7,28 +7,28 @@ import 'package:mealselection/models/food.dart';
 import 'package:mealselection/models/lists.dart';
 import 'package:provider/provider.dart';
 
-class Breakfast extends StatefulWidget {
+class Lunch extends StatefulWidget {
   final Food food;
-  const Breakfast({super.key, required this.food});
+  const Lunch({super.key, required this.food});
 
   @override
-  State<Breakfast> createState() => _BreakfastState();
+  State<Lunch> createState() => _LunchState();
 }
 
-class _BreakfastState extends State<Breakfast> {
+class _LunchState extends State<Lunch> {
   @override
   Widget build(BuildContext context) {
-    //get the breakfast menu and choose a random item
+    //get the lunch menu and choose a random item
     final items = context.read<DeliciousChoices>();
-    final randomBreakfastIndex = Random().nextInt(items.breakfastMenu.length);
+    final randomLunchIndex = Random().nextInt(items.lunchMenu.length);
     setState(() {
-      randomBreakfastIndex;
+      randomLunchIndex;
     });
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Breakfast'),
+        title: const Text('Lunch'),
         centerTitle: true,
       ),
       body: Container(
@@ -67,8 +67,8 @@ class _BreakfastState extends State<Breakfast> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Breakfast(
-                            food: items.breakfastMenu[randomBreakfastIndex],
+                          builder: (context) => Lunch(
+                            food: items.lunchMenu[randomLunchIndex],
                           ),
                         ),
                       );
@@ -83,15 +83,15 @@ class _BreakfastState extends State<Breakfast> {
                 separatorBuilder: (context, index) => const Divider(
                   color: Colors.grey,
                 ),
-                itemCount: items.breakfastMenu.length,
+                itemCount: items.lunchMenu.length,
                 itemBuilder: (context, index) => FoodTile(
-                  food: items.breakfastMenu[index],
+                  food: items.lunchMenu[index],
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Breakfast(
-                          food: items.breakfastMenu[index],
+                        builder: (context) => Lunch(
+                          food: items.lunchMenu[index],
                         ),
                       ),
                     );

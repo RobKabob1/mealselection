@@ -29,35 +29,90 @@ class DeliciousChoices extends ChangeNotifier {
     ),
   ];
 
+  final List<Food> _lunchMenu = [
+    Food(
+      name: "Turkey Spaghetti",
+      imagePath: "images/food/turkey_spaghetti.png",
+    ),
+    Food(
+      name: "Turkey Quinoa",
+      imagePath: "images/food/turkey_quinoa.png",
+    ),
+    Food(
+      name: "Tomato Basil Soup w/ Chicken",
+      imagePath: "images/food/tomato_basil_soup.png",
+    ),
+    Food(
+      name: "Beef Broccoli",
+      imagePath: "images/food/beef_broccoli.png",
+    ),
+    Food(
+      name: "Chicken & Veggies",
+      imagePath: "images/food/chicken_and_veggies.png",
+    ),
+    Food(
+      name: "Salmon & Veggies",
+      imagePath: "images/food/salmon_and_veggies.png",
+    ),
+  ];
+
+  final List<Food> _dinnerMenu = [
+    Food(
+      name: "Pizza",
+      imagePath: "images/food/pizza.png",
+    ),
+    Food(
+      name: "Chicken Quesadilla",
+      imagePath: "images/food/chicken_quesadilla.png",
+    ),
+  ];
+
+  final List<Food> _restaurantList = [
+    Food(
+      name: "Chick-fil-a",
+      imagePath: "images/food/chick_fil_a.png",
+    ),
+    Food(
+      name: "Island Grill",
+      imagePath: "images/food/island_grill.png",
+    ),
+    Food(
+      name: "Zaab Der",
+      imagePath: "images/food/zaab_der.png",
+    ),
+    Food(
+      name: "Fajita Pete's",
+      imagePath: "images/food/fajita_petes.png",
+    ),
+    Food(
+      name: "Carrabbas",
+      imagePath: "images/food/carrabbas.png",
+    ),
+    Food(
+      name: "Pappadeaux's",
+      imagePath: "images/food/pappadeauxs.png",
+    ),
+    Food(
+      name: "Mikoto",
+      imagePath: "images/food/mikoto.png",
+    ),
+  ];
+
+  final List<Food> _snacksList = [
+    Food(
+      name: "Bobo Tea",
+      imagePath: "images/food/bobo_tea.png",
+    ),
+    Food(
+      name: "Tiff's Treats",
+      imagePath: "images/food/tiffs_treats.png",
+    ),
+  ];
+
 //getter methods
   List<Food> get breakfastMenu => _breakfastMenu;
+  List<Food> get lunchMenu => _lunchMenu;
+  List<Food> get dinnerMenu => _dinnerMenu;
+  List<Food> get restaurantList => _restaurantList;
+  List<Food> get snacksList => _snacksList;
 }
-
-// var lunchList = [
-//   "Turkey Spaghetti",
-//   "Turkey Quinoa",
-//   "Tomato Basil Soup w/ Chicken",
-//   "Beef Broccoli",
-//   "Chicken & Veggies",
-//   "Salmon & Veggies",
-// ];
-
-// var dinnerList = [
-//   "Pizza",
-//   "Chicken Quesadilla",
-// ];
-
-// var restaurantsList = [
-//   "Chick fil a",
-//   "Island Grill",
-//   "Zaab Der",
-//   "Fajita Pete's",
-//   "Carrabbas",
-//   "Pappadeaux's",
-//   "Mikoto",
-// ];
-
-// var snacksList = [
-//   "Boba Tea",
-//   "Tiff's Treats",
-// ];

@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mealselection/breakfast.dart';
+import 'package:mealselection/lunch.dart';
 import 'package:mealselection/models/lists.dart';
 import 'package:provider/provider.dart';
 
@@ -40,10 +41,10 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     //build a random choice
     final items = context.read<DeliciousChoices>();
-    final breakfastMenu = items.breakfastMenu;
-    final randomIndex = Random().nextInt(breakfastMenu.length);
+    final randomBreakfastIndex = Random().nextInt(items.breakfastMenu.length);
+    final randomLunchIndex = Random().nextInt(items.lunchMenu.length);
     setState(() {
-      randomIndex;
+      randomBreakfastIndex;
       //print("home: $randomIndex");
     });
 
@@ -71,7 +72,7 @@ class _HomeState extends State<Home> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => Breakfast(
-                          food: breakfastMenu[randomIndex],
+                          food: items.breakfastMenu[randomBreakfastIndex],
                         ),
                       ),
                     );
@@ -83,7 +84,16 @@ class _HomeState extends State<Home> {
                 child: IconButton(
                   iconSize: 20,
                   icon: Image.asset('images/screens/lunch.png'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Lunch(
+                          food: items.lunchMenu[randomLunchIndex],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               //dinner
