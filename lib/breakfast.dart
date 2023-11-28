@@ -1,5 +1,8 @@
+//import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:mealselection/lists.dart';
+import 'package:mealselection/components/food_tile.dart';
+import 'package:mealselection/models/lists.dart';
+import 'package:provider/provider.dart';
 
 class Breakfast extends StatefulWidget {
   const Breakfast({super.key});
@@ -9,11 +12,14 @@ class Breakfast extends StatefulWidget {
 }
 
 class _BreakfastState extends State<Breakfast> {
-  // final items = List<String>.generate(10, (i) => 'Item $i');
-  final items = breakfastList;
+  void navigateToFoodDetails(int index) {}
 
   @override
   Widget build(BuildContext context) {
+    //get the breakfast menu
+    final items = context.read<DeliciousChoices>();
+    final breakfastMenu = items.breakfastMenu;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -28,7 +34,7 @@ class _BreakfastState extends State<Breakfast> {
               children: [
                 Expanded(
                   child: Image.asset(
-                    'images/breakfast_taquitos.png',
+                    'images/food/breakfast_taquitos.png',
                     height: 200,
                     fit: BoxFit.fitWidth,
                   ),
@@ -41,7 +47,7 @@ class _BreakfastState extends State<Breakfast> {
                 const Expanded(
                   flex: 3,
                   child: Text(
-                    'Breakfast Taquitos',
+                    "bob",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 25,
@@ -63,17 +69,11 @@ class _BreakfastState extends State<Breakfast> {
                 separatorBuilder: (context, index) => const Divider(
                   color: Colors.grey,
                 ),
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                      items[index]["name"],
-                    ),
-                    subtitle: Text(
-                      items[index]["path"],
-                    ),
-                  );
-                },
+                itemCount: breakfastMenu.length,
+                itemBuilder: (context, index) => FoodTile(
+                  food: breakfastMenu[index],
+                  onTap: () => navigateToFoodDetails(index),
+                ),
               ),
             ),
           ],

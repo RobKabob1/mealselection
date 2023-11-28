@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
                 child: IconButton(
                   iconSize: 20,
                   icon: Image.asset(
-                    'images/breakfast.png',
+                    'images/screens/breakfast.png',
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: IconButton(
                   iconSize: 20,
-                  icon: Image.asset('images/lunch.png'),
+                  icon: Image.asset('images/screens/lunch.png'),
                   onPressed: () {},
                 ),
               ),
@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: IconButton(
                   iconSize: 20,
-                  icon: Image.asset('images/dinner.png'),
+                  icon: Image.asset('images/screens/dinner.png'),
                   onPressed: () {},
                 ),
               ),
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
                 child: IconButton(
                   iconSize: 20,
                   icon: Image.asset(
-                    'images/restaurants.png',
+                    'images/screens/restaurants.png',
                   ),
                   onPressed: () {},
                 ),
@@ -72,7 +72,7 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: IconButton(
                   iconSize: 20,
-                  icon: Image.asset('images/snacks.png'),
+                  icon: Image.asset('images/screens/snacks.png'),
                   onPressed: () {},
                 ),
               ),

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mealselection/home.dart';
+import 'package:mealselection/models/lists.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => DeliciousChoices(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
