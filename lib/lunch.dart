@@ -39,7 +39,7 @@ class _LunchState extends State<Lunch> {
                   child: Image.asset(
                     widget.food.imagePath,
                     height: 200,
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.fill,
                   ),
                 ),
               ],
