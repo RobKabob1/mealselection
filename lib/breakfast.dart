@@ -28,6 +28,19 @@ class _BreakfastState extends State<Breakfast> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Breakfast'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/home', (route) => false);
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.account_circle_rounded),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.grey[350]),

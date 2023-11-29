@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const Home(title: 'Meal Selection'),
+      routes: {
+        '/home': (context) => const Home(title: 'Meal Selection'),
+      },
     );
   }
 }
