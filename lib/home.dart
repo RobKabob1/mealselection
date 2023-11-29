@@ -51,95 +51,152 @@ class _HomeState extends State<Home> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 20),
               //breakfast
               Expanded(
-                child: IconButton(
-                  iconSize: 20,
-                  icon: Image.asset(
-                    'images/screens/breakfast.png',
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Breakfast(
-                          food: items.breakfastMenu[randomBreakfastIndex],
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Breakfast(
+                            food: items.breakfastMenu[randomBreakfastIndex],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(55),
+                        image: const DecorationImage(
+                          image: AssetImage('images/screens/breakfast.png'),
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
               ),
+              const SizedBox(height: 10),
               //lunch
               Expanded(
-                child: IconButton(
-                  iconSize: 20,
-                  icon: Image.asset('images/screens/lunch.png'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Lunch(
-                          food: items.lunchMenu[randomLunchIndex],
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Lunch(
+                            food: items.lunchMenu[randomLunchIndex],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(55),
+                        image: const DecorationImage(
+                          image: AssetImage('images/screens/lunch.png'),
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
               ),
+              const SizedBox(height: 10),
               //dinner
               Expanded(
-                child: IconButton(
-                  iconSize: 20,
-                  icon: Image.asset('images/screens/dinner.png'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Dinner(
-                          food: items.dinnerMenu[randomDinnerIndex],
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Dinner(
+                            food: items.dinnerMenu[randomDinnerIndex],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(55),
+                        image: const DecorationImage(
+                          image: AssetImage('images/screens/dinner.png'),
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
               ),
+              const SizedBox(height: 10),
               //restaurants
               Expanded(
-                child: IconButton(
-                  iconSize: 20,
-                  icon: Image.asset(
-                    'images/screens/restaurants.png',
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Restaurants(
-                          food: items.restaurantList[randomRestaurantIndex],
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Restaurants(
+                            food: items.restaurantList[randomRestaurantIndex],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(55),
+                        image: const DecorationImage(
+                          image: AssetImage('images/screens/restaurants.png'),
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
               ),
+              const SizedBox(height: 10),
               //snacks
               Expanded(
-                child: IconButton(
-                  iconSize: 20,
-                  icon: Image.asset('images/screens/snacks.png'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Snacks(
-                          food: items.snacksList[randomSnackIndex],
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Snacks(
+                            food: items.snacksList[randomSnackIndex],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(55),
+                        image: const DecorationImage(
+                          image: AssetImage('images/screens/snacks.png'),
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
