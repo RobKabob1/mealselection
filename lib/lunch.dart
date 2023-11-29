@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:mealselection/components/food_tile.dart';
 import 'package:mealselection/models/food.dart';
 import 'package:mealselection/models/lists.dart';
 import 'package:provider/provider.dart';
@@ -90,24 +89,65 @@ class _LunchState extends State<Lunch> {
             ),
             const SizedBox(height: 10),
             Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 10,
-                ),
-                itemCount: items.lunchMenu.length,
-                itemBuilder: (context, index) => FoodTile(
-                  food: items.lunchMenu[index],
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Lunch(
-                          food: items.lunchMenu[index],
+              child: ReorderableListView(
+                autoScrollerVelocityScalar: 100,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                onReorder: (int oldIndex, int newIndex) {
+                  setState(
+                    () {
+                      if (oldIndex < newIndex) {
+                        newIndex -= 1;
+                      }
+                      final Food item = items.lunchMenu.removeAt(oldIndex);
+                      items.lunchMenu.insert(newIndex, item);
+                    },
+                  );
+                },
+                children: [
+                  for (int index = 0;
+                      index < items.lunchMenu.length;
+                      index += 1)
+                    Card(
+                      key: Key('$index'),
+                      color: Colors.grey[200],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Lunch(
+                                food: items.lunchMenu[index],
+                              ),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 6,
+                              child: SizedBox(
+                                height: 50,
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Text(items.lunchMenu[index].name,
+                                      style: const TextStyle(fontSize: 20)),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.delete)),
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 25, 0),
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                ],
               ),
             ),
           ],
