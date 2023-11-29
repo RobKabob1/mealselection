@@ -78,8 +78,8 @@ class _DinnerState extends State<Dinner> {
             const SizedBox(height: 10),
             Expanded(
               child: ListView.separated(
-                separatorBuilder: (context, index) => const Divider(
-                  color: Colors.grey,
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 10,
                 ),
                 itemCount: items.dinnerMenu.length,
                 itemBuilder: (context, index) => FoodTile(

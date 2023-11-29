@@ -16,7 +16,7 @@ class Snacks extends StatefulWidget {
 class _SnacksState extends State<Snacks> {
   @override
   Widget build(BuildContext context) {
-    //get the restaurant menu and choose a random item
+    //get the snacks menu and choose a random item
     final items = context.read<DeliciousChoices>();
     final randomSnackIndex = Random().nextInt(items.snacksList.length);
     setState(() {
@@ -26,7 +26,7 @@ class _SnacksState extends State<Snacks> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Restaurants'),
+        title: const Text('Snacks'),
         centerTitle: true,
       ),
       body: Container(
@@ -78,8 +78,8 @@ class _SnacksState extends State<Snacks> {
             const SizedBox(height: 10),
             Expanded(
               child: ListView.separated(
-                separatorBuilder: (context, index) => const Divider(
-                  color: Colors.grey,
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 10,
                 ),
                 itemCount: items.snacksList.length,
                 itemBuilder: (context, index) => FoodTile(

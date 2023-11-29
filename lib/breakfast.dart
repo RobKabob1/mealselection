@@ -78,8 +78,8 @@ class _BreakfastState extends State<Breakfast> {
             const SizedBox(height: 10),
             Expanded(
               child: ListView.separated(
-                separatorBuilder: (context, index) => const Divider(
-                  color: Colors.grey,
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 10,
                 ),
                 itemCount: items.breakfastMenu.length,
                 itemBuilder: (context, index) => FoodTile(
