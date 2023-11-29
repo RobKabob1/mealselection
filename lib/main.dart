@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mealselection/home.dart';
 import 'package:mealselection/models/lists.dart';
 import 'package:provider/provider.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() {
+  setPathUrlStrategy();
   runApp(
     ChangeNotifierProvider(
       create: (context) => DeliciousChoices(),
