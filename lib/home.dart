@@ -37,9 +37,16 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-        centerTitle: true,
+        backgroundColor: Colors.grey[350],
+        title: Text(
+          widget.title,
+          style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              fontFamily: 'Times New Roman'),
+        ),
+        // centerTitle: true,
         actions: [
           IconButton(
               icon: const Icon(Icons.account_circle_rounded), onPressed: () {}),
@@ -51,7 +58,6 @@ class _HomeState extends State<Home> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
               //breakfast
               Expanded(
                 child: Container(
@@ -63,6 +69,7 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(
                           builder: (context) => Breakfast(
                             food: items.breakfastMenu[randomBreakfastIndex],
+                            title: 'Breakfast',
                           ),
                         ),
                       );
@@ -70,7 +77,7 @@ class _HomeState extends State<Home> {
                     child: Container(
                       clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(55),
+                        borderRadius: BorderRadius.circular(25),
                         image: const DecorationImage(
                           image: AssetImage('images/screens/breakfast.png'),
                           fit: BoxFit.fitWidth,
@@ -92,6 +99,7 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(
                           builder: (context) => Lunch(
                             food: items.lunchMenu[randomLunchIndex],
+                            title: 'Lunch',
                           ),
                         ),
                       );
@@ -99,7 +107,7 @@ class _HomeState extends State<Home> {
                     child: Container(
                       clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(55),
+                        borderRadius: BorderRadius.circular(25),
                         image: const DecorationImage(
                           image: AssetImage('images/screens/lunch.png'),
                           fit: BoxFit.fitWidth,
@@ -121,6 +129,7 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(
                           builder: (context) => Dinner(
                             food: items.dinnerMenu[randomDinnerIndex],
+                            title: 'Dinner',
                           ),
                         ),
                       );
@@ -128,7 +137,7 @@ class _HomeState extends State<Home> {
                     child: Container(
                       clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(55),
+                        borderRadius: BorderRadius.circular(25),
                         image: const DecorationImage(
                           image: AssetImage('images/screens/dinner.png'),
                           fit: BoxFit.fitWidth,
@@ -150,6 +159,7 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(
                           builder: (context) => Restaurants(
                             food: items.restaurantList[randomRestaurantIndex],
+                            title: 'Restaurants',
                           ),
                         ),
                       );
@@ -157,7 +167,7 @@ class _HomeState extends State<Home> {
                     child: Container(
                       clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(55),
+                        borderRadius: BorderRadius.circular(25),
                         image: const DecorationImage(
                           image: AssetImage('images/screens/restaurants.png'),
                           fit: BoxFit.fitWidth,
@@ -179,6 +189,7 @@ class _HomeState extends State<Home> {
                         MaterialPageRoute(
                           builder: (context) => Snacks(
                             food: items.snacksList[randomSnackIndex],
+                            title: 'Snacks',
                           ),
                         ),
                       );
@@ -186,7 +197,7 @@ class _HomeState extends State<Home> {
                     child: Container(
                       clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(55),
+                        borderRadius: BorderRadius.circular(25),
                         image: const DecorationImage(
                           image: AssetImage('images/screens/snacks.png'),
                           fit: BoxFit.fitWidth,

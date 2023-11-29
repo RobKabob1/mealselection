@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Meal Selection',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         useMaterial3: true,
         shadowColor: Colors.transparent,
         canvasColor: Colors.transparent,

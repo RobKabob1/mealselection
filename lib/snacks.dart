@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 
 class Snacks extends StatefulWidget {
   final Food food;
-  const Snacks({super.key, required this.food});
+  final String title;
+  const Snacks({super.key, required this.food, required this.title});
 
   @override
   State<Snacks> createState() => _SnacksState();
@@ -24,8 +25,15 @@ class _SnacksState extends State<Snacks> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Snacks'),
+        backgroundColor: Colors.grey[350],
+        title: Text(
+          widget.title,
+          style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              fontFamily: 'Times New Roman'),
+        ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -79,6 +87,7 @@ class _SnacksState extends State<Snacks> {
                         MaterialPageRoute(
                           builder: (context) => Snacks(
                             food: items.snacksList[randomSnackIndex],
+                            title: 'Snacks',
                           ),
                         ),
                       );
@@ -120,6 +129,7 @@ class _SnacksState extends State<Snacks> {
                             MaterialPageRoute(
                               builder: (context) => Snacks(
                                 food: items.snacksList[index],
+                                title: 'Snacks',
                               ),
                             ),
                           );
