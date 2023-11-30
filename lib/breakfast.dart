@@ -19,7 +19,12 @@ class _BreakfastState extends State<Breakfast> {
   Widget build(BuildContext context) {
     //get the breakfast menu and choose a random item
     final items = context.read<DeliciousChoices>();
-    final randomBreakfastIndex = Random().nextInt(items.breakfastMenu.length);
+    final int randomBreakfastIndex;
+    if (items.breakfastMenu.isEmpty) {
+      randomBreakfastIndex = 0;
+    } else {
+      randomBreakfastIndex = Random().nextInt(items.breakfastMenu.length);
+    }
     setState(() {
       randomBreakfastIndex;
     });
@@ -149,7 +154,10 @@ class _BreakfastState extends State<Breakfast> {
                               ),
                             ),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  items.breakfastMenu.removeAt(index);
+                                  setState(() {});
+                                },
                                 icon: const Icon(Icons.delete)),
                             const Padding(
                               padding: EdgeInsets.fromLTRB(0, 0, 25, 0),
