@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/breakfast.dart';
 import 'package:mealselection/dinner.dart';
@@ -49,7 +50,35 @@ class _HomeState extends State<Home> {
         // centerTitle: true,
         actions: [
           IconButton(
-              icon: const Icon(Icons.account_circle_rounded), onPressed: () {}),
+            icon: const Icon(Icons.account_circle_rounded),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<ProfileScreen>(
+                  builder: (context) => ProfileScreen(
+                    appBar: AppBar(
+                      title: const Text('User Profile'),
+                    ),
+                    actions: [
+                      SignedOutAction((context) {
+                        Navigator.of(context).pop();
+                      })
+                    ],
+                    children: [
+                      const Divider(),
+                      Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: Image.asset('images/icons/web.png'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
       body: Container(
