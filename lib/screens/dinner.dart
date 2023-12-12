@@ -1,32 +1,27 @@
 import 'dart:math';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/models/food.dart';
 import 'package:mealselection/models/lists.dart';
 import 'package:provider/provider.dart';
 
-class Breakfast extends StatefulWidget {
+class Dinner extends StatefulWidget {
   final Food food;
   final String title;
-
-  const Breakfast({super.key, required this.food, required this.title});
+  const Dinner({super.key, required this.food, required this.title});
 
   @override
-  State<Breakfast> createState() => _BreakfastState();
+  State<Dinner> createState() => _DinnerState();
 }
 
-class _BreakfastState extends State<Breakfast> {
+class _DinnerState extends State<Dinner> {
   @override
   Widget build(BuildContext context) {
-    //get the breakfast menu and choose a random item
+    //get the dinner menu and choose a random item
     final items = context.read<DeliciousChoices>();
-    final int randomBreakfastIndex;
-    if (items.breakfastMenu.isEmpty) {
-      randomBreakfastIndex = 0;
-    } else {
-      randomBreakfastIndex = Random().nextInt(items.breakfastMenu.length);
-    }
+    final randomDinnerIndex = Random().nextInt(items.dinnerMenu.length);
     setState(() {
-      randomBreakfastIndex;
+      randomDinnerIndex;
     });
 
     return Scaffold(
@@ -51,7 +46,33 @@ class _BreakfastState extends State<Breakfast> {
           ),
           IconButton(
             icon: const Icon(Icons.account_circle_rounded),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<ProfileScreen>(
+                  builder: (context) => ProfileScreen(
+                    appBar: AppBar(
+                      title: const Text('User Profile'),
+                    ),
+                    actions: [
+                      SignedOutAction((context) {
+                        Navigator.of(context).pop();
+                      })
+                    ],
+                    children: [
+                      const Divider(),
+                      Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: Image.asset('images/icons/web.png'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -91,9 +112,9 @@ class _BreakfastState extends State<Breakfast> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Breakfast(
-                            food: items.breakfastMenu[randomBreakfastIndex],
-                            title: 'Breakfast',
+                          builder: (context) => Dinner(
+                            food: items.dinnerMenu[randomDinnerIndex],
+                            title: 'Dinner',
                           ),
                         ),
                       );
@@ -113,14 +134,14 @@ class _BreakfastState extends State<Breakfast> {
                       if (oldIndex < newIndex) {
                         newIndex -= 1;
                       }
-                      final Food item = items.breakfastMenu.removeAt(oldIndex);
-                      items.breakfastMenu.insert(newIndex, item);
+                      final Food item = items.dinnerMenu.removeAt(oldIndex);
+                      items.dinnerMenu.insert(newIndex, item);
                     },
                   );
                 },
                 children: [
                   for (int index = 0;
-                      index < items.breakfastMenu.length;
+                      index < items.dinnerMenu.length;
                       index += 1)
                     Card(
                       key: Key('$index'),
@@ -133,9 +154,9 @@ class _BreakfastState extends State<Breakfast> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Breakfast(
-                                food: items.breakfastMenu[index],
-                                title: 'Breakfast',
+                              builder: (context) => Dinner(
+                                food: items.dinnerMenu[index],
+                                title: 'Dinner',
                               ),
                             ),
                           );
@@ -148,16 +169,13 @@ class _BreakfastState extends State<Breakfast> {
                                 height: 50,
                                 child: Container(
                                   alignment: Alignment.center,
-                                  child: Text(items.breakfastMenu[index].name,
+                                  child: Text(items.dinnerMenu[index].name,
                                       style: const TextStyle(fontSize: 20)),
                                 ),
                               ),
                             ),
                             IconButton(
-                                onPressed: () {
-                                  items.breakfastMenu.removeAt(index);
-                                  setState(() {});
-                                },
+                                onPressed: () {},
                                 icon: const Icon(Icons.delete)),
                             const Padding(
                               padding: EdgeInsets.fromLTRB(0, 0, 25, 0),

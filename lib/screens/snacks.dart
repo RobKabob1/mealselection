@@ -1,26 +1,27 @@
 import 'dart:math';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/models/food.dart';
 import 'package:mealselection/models/lists.dart';
 import 'package:provider/provider.dart';
 
-class Dinner extends StatefulWidget {
+class Snacks extends StatefulWidget {
   final Food food;
   final String title;
-  const Dinner({super.key, required this.food, required this.title});
+  const Snacks({super.key, required this.food, required this.title});
 
   @override
-  State<Dinner> createState() => _DinnerState();
+  State<Snacks> createState() => _SnacksState();
 }
 
-class _DinnerState extends State<Dinner> {
+class _SnacksState extends State<Snacks> {
   @override
   Widget build(BuildContext context) {
-    //get the dinner menu and choose a random item
+    //get the snacks menu and choose a random item
     final items = context.read<DeliciousChoices>();
-    final randomDinnerIndex = Random().nextInt(items.dinnerMenu.length);
+    final randomSnackIndex = Random().nextInt(items.snacksList.length);
     setState(() {
-      randomDinnerIndex;
+      randomSnackIndex;
     });
 
     return Scaffold(
@@ -45,7 +46,33 @@ class _DinnerState extends State<Dinner> {
           ),
           IconButton(
             icon: const Icon(Icons.account_circle_rounded),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<ProfileScreen>(
+                  builder: (context) => ProfileScreen(
+                    appBar: AppBar(
+                      title: const Text('User Profile'),
+                    ),
+                    actions: [
+                      SignedOutAction((context) {
+                        Navigator.of(context).pop();
+                      })
+                    ],
+                    children: [
+                      const Divider(),
+                      Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: Image.asset('images/icons/web.png'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -85,9 +112,9 @@ class _DinnerState extends State<Dinner> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Dinner(
-                            food: items.dinnerMenu[randomDinnerIndex],
-                            title: 'Dinner',
+                          builder: (context) => Snacks(
+                            food: items.snacksList[randomSnackIndex],
+                            title: 'Snacks',
                           ),
                         ),
                       );
@@ -107,14 +134,14 @@ class _DinnerState extends State<Dinner> {
                       if (oldIndex < newIndex) {
                         newIndex -= 1;
                       }
-                      final Food item = items.dinnerMenu.removeAt(oldIndex);
-                      items.dinnerMenu.insert(newIndex, item);
+                      final Food item = items.snacksList.removeAt(oldIndex);
+                      items.snacksList.insert(newIndex, item);
                     },
                   );
                 },
                 children: [
                   for (int index = 0;
-                      index < items.dinnerMenu.length;
+                      index < items.snacksList.length;
                       index += 1)
                     Card(
                       key: Key('$index'),
@@ -127,9 +154,9 @@ class _DinnerState extends State<Dinner> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Dinner(
-                                food: items.dinnerMenu[index],
-                                title: 'Dinner',
+                              builder: (context) => Snacks(
+                                food: items.snacksList[index],
+                                title: 'Snacks',
                               ),
                             ),
                           );
@@ -142,7 +169,7 @@ class _DinnerState extends State<Dinner> {
                                 height: 50,
                                 child: Container(
                                   alignment: Alignment.center,
-                                  child: Text(items.dinnerMenu[index].name,
+                                  child: Text(items.snacksList[index].name,
                                       style: const TextStyle(fontSize: 20)),
                                 ),
                               ),
