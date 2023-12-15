@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+// import 'package:mealselection/components/input_button.dart';
 import 'package:mealselection/screens/breakfast.dart';
 import 'package:mealselection/screens/dinner.dart';
 import 'package:mealselection/screens/lunch.dart';
@@ -101,6 +102,11 @@ class _HomeState extends State<Home> {
                             title: 'Breakfast',
                           ),
                         ),
+                        // MaterialPageRoute(
+                        //   builder: (context) => const InputButton(
+                        //     title: 'Input',
+                        //   ),
+                        // ),
                       );
                     },
                     child: Container(
