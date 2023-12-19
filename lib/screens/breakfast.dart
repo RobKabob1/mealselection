@@ -2,7 +2,8 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mealselection/components/input_button.dart';
+import 'package:mealselection/components/edit_button.dart';
+import 'package:mealselection/components/add_button.dart';
 import 'package:mealselection/models/food.dart';
 import 'package:mealselection/models/lists.dart';
 import 'package:provider/provider.dart';
@@ -18,8 +19,10 @@ class Breakfast extends StatefulWidget {
 }
 
 class _BreakfastState extends State<Breakfast> {
-  final Stream<QuerySnapshot> _dataStream =
-      FirebaseFirestore.instance.collection('data').snapshots();
+  final Stream<QuerySnapshot> _dataStream = FirebaseFirestore.instance
+      .collection('data')
+      .where('meal', isEqualTo: 'Breakfast')
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +120,10 @@ class _BreakfastState extends State<Breakfast> {
                 ),
                 const Expanded(
                   flex: 1,
-                  child: InputButton(function: "Add"),
+                  child: AddButton(
+                    function: "Add",
+                    docMeal: "Breakfast",
+                  ),
                 ),
                 Expanded(
                   flex: 1,
@@ -183,10 +189,20 @@ class _BreakfastState extends State<Breakfast> {
                                   ),
                                 ),
                               ),
+                              EditButton(
+                                function: "Edit",
+                                docID: document.id,
+                                docText: data['text'],
+                              ),
                               IconButton(
-                                  //functionality to delete
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.delete)),
+                                onPressed: () {
+                                  FirebaseFirestore.instance
+                                      .collection('data')
+                                      .doc(document.id)
+                                      .delete();
+                                },
+                                icon: const Icon(Icons.delete),
+                              ),
                               const Padding(
                                 padding: EdgeInsets.fromLTRB(0, 0, 25, 0),
                               ),

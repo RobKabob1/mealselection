@@ -102,11 +102,6 @@ class _HomeState extends State<Home> {
                             title: 'Breakfast',
                           ),
                         ),
-                        // MaterialPageRoute(
-                        //   builder: (context) => const InputButton(
-                        //     title: 'Input',
-                        //   ),
-                        // ),
                       );
                     },
                     child: Container(

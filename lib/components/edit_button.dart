@@ -1,28 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class InputButton extends StatefulWidget {
+class EditButton extends StatefulWidget {
   final String function;
+  final String docID;
+  final String docText;
 
-  const InputButton({super.key, required this.function});
+  const EditButton({
+    super.key,
+    required this.function,
+    required this.docID,
+    required this.docText,
+  });
 
   @override
-  State<InputButton> createState() => _InputButtonState();
+  State<EditButton> createState() => _EditButtonState();
 }
 
-class _InputButtonState extends State<InputButton> {
+class _EditButtonState extends State<EditButton> {
+  final TextEditingController textFieldController = TextEditingController();
+
   Future<void> displayTextInputDialog(BuildContext context) async {
-    final TextEditingController textFieldController = TextEditingController();
     return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           content: TextField(
-            onChanged: (value) {
-              setState(() {
-                valueText = value;
-              });
-            },
             controller: textFieldController,
             decoration: const InputDecoration(hintText: "Meal Name"),
           ),
@@ -41,7 +44,10 @@ class _InputButtonState extends State<InputButton> {
                 setState(() {
                   FirebaseFirestore.instance
                       .collection('data')
-                      .add({'text': '$valueText'});
+                      .doc(widget.docID)
+                      .update({
+                    'text': textFieldController.text,
+                  });
                   Navigator.pop(context);
                 });
               },
@@ -52,11 +58,17 @@ class _InputButtonState extends State<InputButton> {
     );
   }
 
+  @override
+  void initState() {
+    textFieldController.text = widget.docText;
+    return super.initState();
+  }
+
   String? valueText;
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.add),
+      icon: const Icon(Icons.edit),
       onPressed: () {
         displayTextInputDialog(context);
       },
