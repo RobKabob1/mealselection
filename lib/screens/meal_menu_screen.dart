@@ -67,20 +67,20 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
           children: [
             Row(
               children: [
-                Expanded(
-                  child: widget.foodUrl == ''
-                      ? Expanded(
-                          child: SvgPicture.asset(
-                            'images/icons/image-outline.svg',
-                            colorFilter: const ColorFilter.mode(
-                                primaryColor, BlendMode.srcIn),
-                            height: 300,
-                            fit: BoxFit.fitHeight,
-                          ),
-                        )
-                      : Image.network(widget.foodUrl,
-                          height: 300, fit: BoxFit.fitHeight),
-                ),
+                widget.foodUrl == ''
+                    ? Expanded(
+                        child: SvgPicture.asset(
+                          'images/icons/image-outline.svg',
+                          colorFilter: const ColorFilter.mode(
+                              primaryColor, BlendMode.srcIn),
+                          height: 300,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      )
+                    : Expanded(
+                        child: Image.network(widget.foodUrl,
+                            height: 300, fit: BoxFit.fitHeight),
+                      ),
               ],
             ),
             const SizedBox(height: 10),
@@ -141,6 +141,7 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
                               'Add some items to the ${widget.title} list'),
                         )
                       : ListView.builder(
+                          // return ListView.builder(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index) => FoodCard(
