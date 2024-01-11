@@ -28,4 +28,19 @@ class StorageMethods {
     Future<String> downloadUrl = snap.ref.getDownloadURL();
     return downloadUrl;
   }
+
+  // deleting the image from firebase storage
+  Future<String> deleteImageInStorage(String foodUrl) async {
+    // Reference ref = _storage
+    //     .ref()
+    //     .child('food')
+    //     .child(_auth.currentUser!.email!)
+    //     .child(foodId);
+
+    Reference ref = FirebaseStorage.instance.refFromURL(foodUrl);
+
+    await ref.delete();
+
+    return "completed deletion";
+  }
 }

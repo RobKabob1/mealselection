@@ -1,11 +1,9 @@
 // ignore_for_file: use_build_context_synchronously, prefer_typing_uninitialized_variables
-
 import 'package:flutter/material.dart';
 import 'package:mealselection/components/edit_button.dart';
 import 'package:mealselection/resources/firestore_methods.dart';
 import 'package:mealselection/screens/meal_menu_screen.dart';
 import 'package:mealselection/utils/colors.dart';
-import 'package:mealselection/utils/utils.dart';
 
 class FoodCard extends StatefulWidget {
   final snap;
@@ -23,22 +21,20 @@ class _FoodCardState extends State<FoodCard> {
   void deleteFoodNameWithSnackBar(
     String foodId,
     String foodName,
+    String foodUrl,
   ) async {
     setState(() {});
     try {
       String res = await FirestoreMethods().deleteFoodName(
         foodId,
+        foodUrl,
       );
 
-      if (res == "success") {
-        setState(() {});
-        showSnackBar('Deleted $foodName', context);
-      } else {
-        setState(() {});
-        showSnackBar(res, context);
+      if (res != "success") {
+        debugPrint(res);
       }
     } catch (e) {
-      showSnackBar(e.toString(), context);
+      debugPrint(e.toString());
     }
   }
 
@@ -84,8 +80,8 @@ class _FoodCardState extends State<FoodCard> {
             ),
             IconButton(
               onPressed: () {
-                deleteFoodNameWithSnackBar(
-                    widget.snap['foodId'], widget.snap['foodName']);
+                deleteFoodNameWithSnackBar(widget.snap['foodId'],
+                    widget.snap['foodName'], widget.snap['foodUrl']);
               },
               icon: const Icon(Icons.delete),
             ),

@@ -177,53 +177,5 @@ class _AddButtonState extends State<AddButton> {
         ),
       ],
     );
-    // return AlertDialog(
-    //               content: Column(
-    //                 children: [
-    //                   Expanded(
-    //                     flex: 3,
-    //                     child: _displayCorrectImage(),
-    //                   ),
-    //                   IconButton(
-    //                     onPressed: () => _pickImage(setState_: setState),
-    //                     icon: const Icon(Icons.photo),
-    //                   ),
-    //                   TextField(
-    //                     controller: textFieldController,
-    //                     decoration:
-    //                         const InputDecoration(hintText: "Meal Name"),
-    //                   ),
-    //                 ],
-    //               ),
-    //               actions: <Widget>[
-    //                 MaterialButton(
-    //                   child: const Text('CANCEL'),
-    //                   onPressed: () {
-    //                     setState(() {
-    //                       textFieldController.text = "";
-    //                       _imageFile = null;
-    //                       Navigator.pop(context);
-    //                     });
-    //                   },
-    //                 ),
-    //                 MaterialButton(
-    //                   child: const Text('OK'),
-    //                   onPressed: () {
-    //                     setState(() {
-    //                       FirebaseFirestore.instance.collection('data').add(
-    //                         {
-    //                           'meal': widget.docMeal,
-    //                           'text': textFieldController.text,
-    //                         },
-    //                       );
-    //                       _uploadImage();
-    //                       textFieldController.text = "";
-    //                       _imageFile = null;
-    //                       Navigator.pop(context);
-    //                     });
-    //                   },
-    //                 ),
-    //               ],
-    //             );
   }
 }

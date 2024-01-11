@@ -29,7 +29,7 @@ class FirestoreMethods {
         uid: uid,
       );
 
-      _firestore.collection('food').doc(foodId).set(post.toJson());
+      await _firestore.collection('food').doc(foodId).set(post.toJson());
       res = "success";
     } catch (err) {
       res = err.toString();
@@ -43,7 +43,7 @@ class FirestoreMethods {
   ) async {
     String res = "some error occurred";
     try {
-      _firestore.collection('food').doc(foodId).update({
+      await _firestore.collection('food').doc(foodId).update({
         'foodName': foodName,
       });
       res = "success";
@@ -55,10 +55,12 @@ class FirestoreMethods {
 
   Future<String> deleteFoodName(
     String foodId,
+    String foodUrl,
   ) async {
     String res = "some error occurred";
     try {
-      _firestore.collection('food').doc(foodId).delete();
+      await _firestore.collection('food').doc(foodId).delete();
+      await StorageMethods().deleteImageInStorage(foodUrl);
       res = "success";
     } catch (err) {
       res = err.toString();

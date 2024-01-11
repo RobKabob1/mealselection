@@ -33,9 +33,9 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
         title: Text(
           widget.title,
           style: const TextStyle(
-              fontWeight: FontWeight.w300,
-              fontSize: 25,
-              fontFamily: 'Times New Roman'),
+            fontWeight: FontWeight.w400,
+            fontSize: 25,
+          ),
         ),
         centerTitle: true,
         actions: [
