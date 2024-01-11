@@ -1,5 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:mealselection/resources/firestore_methods.dart';
+import 'package:mealselection/utils/utils.dart';
 
 class EditButton extends StatefulWidget {
   final String function;
@@ -18,7 +21,29 @@ class EditButton extends StatefulWidget {
 }
 
 class _EditButtonState extends State<EditButton> {
-  final TextEditingController textFieldController = TextEditingController();
+  final TextEditingController _textFieldController = TextEditingController();
+
+  void editFoodNameWithSnackBar(
+    String foodName,
+  ) async {
+    try {
+      String res = await FirestoreMethods().editFoodName(
+        widget.docID,
+        _textFieldController.text,
+      );
+
+      if (res == "success") {
+        setState(() {});
+        showSnackBar('Updated ${_textFieldController.text}', context);
+      } else {
+        setState(() {});
+        showSnackBar(res, context);
+      }
+    } catch (e) {
+      showSnackBar(e.toString(), context);
+    }
+    Navigator.pop(context);
+  }
 
   Future<void> displayTextInputDialog(BuildContext context) async {
     return showDialog(
@@ -26,7 +51,7 @@ class _EditButtonState extends State<EditButton> {
       builder: (context) {
         return AlertDialog(
           content: TextField(
-            controller: textFieldController,
+            controller: _textFieldController,
             decoration: const InputDecoration(hintText: "Meal Name"),
           ),
           actions: <Widget>[
@@ -41,15 +66,7 @@ class _EditButtonState extends State<EditButton> {
             MaterialButton(
               child: const Text('OK'),
               onPressed: () {
-                setState(() {
-                  FirebaseFirestore.instance
-                      .collection('data')
-                      .doc(widget.docID)
-                      .update({
-                    'text': textFieldController.text,
-                  });
-                  Navigator.pop(context);
-                });
+                editFoodNameWithSnackBar(_textFieldController.text);
               },
             ),
           ],
@@ -60,8 +77,14 @@ class _EditButtonState extends State<EditButton> {
 
   @override
   void initState() {
-    textFieldController.text = widget.docText;
+    _textFieldController.text = widget.docText;
     return super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _textFieldController.dispose();
   }
 
   String? valueText;

@@ -1,134 +1,229 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:typed_data';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mealselection/models/user.dart';
+import 'package:mealselection/providers/user_provider.dart';
+import 'package:mealselection/resources/firestore_methods.dart';
+import 'package:mealselection/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class AddButton extends StatefulWidget {
-  final String function;
   final String docMeal;
-
-  const AddButton({super.key, required this.function, required this.docMeal});
+  const AddButton({
+    super.key,
+    required this.docMeal,
+  });
 
   @override
   State<AddButton> createState() => _AddButtonState();
 }
 
 class _AddButtonState extends State<AddButton> {
-  final storageRef = FirebaseStorage.instance.ref();
-  PlatformFile? _imageFile;
+  Uint8List? _file;
+  final TextEditingController _mealController = TextEditingController();
 
-  Future<void> _pickImage(
-      {required void Function(void Function()) setState_}) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-      allowMultiple: false,
-    );
-
-    //return nothing if they don't choose an image
-    if (result == null) return;
-
-    //update the image to display with what the user selected
-    setState_(
-      () {
-        _imageFile = result.files.first;
-      },
-    );
-  }
-
-  Future<void> _uploadImage() async {
-    Uint8List? fileBytes;
-    String fileName;
-    final imageFile = _imageFile;
-    if (imageFile != null) {
-      fileBytes = imageFile.bytes;
-      fileName = imageFile.name;
-
-      // upload file
-      await FirebaseStorage.instance
-          .ref('uploads/$fileName')
-          .putData(fileBytes!);
-    }
-  }
-
-  Widget _displayCorrectImage() {
-    if (_imageFile != null) {
-      return Image.memory(
-        Uint8List.fromList(_imageFile!.bytes!),
-        fit: BoxFit.contain,
+  void postImage(
+    String foodId,
+    String uid,
+  ) async {
+    try {
+      String res = await FirestoreMethods().uploadFood(
+        widget.docMeal,
+        _mealController.text,
+        _file!,
+        uid,
       );
-    } else {
-      return const SizedBox();
+
+      if (res == "success") {
+        setState(() {});
+        showSnackBar('Posted!', context);
+        clearImage();
+      } else {
+        setState(() {});
+        showSnackBar(res, context);
+      }
+    } catch (e) {
+      showSnackBar(e.toString(), context);
     }
+    Navigator.pop(context);
   }
 
-  String? valueText;
+  _selectImage(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: const Text('Create a post'),
+            children: [
+              SimpleDialogOption(
+                padding: const EdgeInsets.all(20),
+                child: const Text('Take a photo'),
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  Uint8List file = await pickImage(
+                    ImageSource.camera,
+                  );
+                  setState(() {
+                    _file = file;
+                  });
+                },
+              ),
+              SimpleDialogOption(
+                padding: const EdgeInsets.all(20),
+                child: const Text('Choose from gallery'),
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  Uint8List file = await pickImage(
+                    ImageSource.gallery,
+                  );
+                  setState(() {
+                    _file = file;
+                  });
+                },
+              ),
+              SimpleDialogOption(
+                padding: const EdgeInsets.all(20),
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  void clearImage() {
+    setState(() {
+      _file = null;
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _mealController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController textFieldController = TextEditingController();
-    return IconButton(
-      icon: const Icon(Icons.add),
-      onPressed: () {
-        showDialog(
-          context: (context),
-          builder: (context) {
-            return StatefulBuilder(
-              builder: (context, setState) {
-                return AlertDialog(
-                  content: Column(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: _displayCorrectImage(),
-                      ),
-                      IconButton(
-                        onPressed: () => _pickImage(setState_: setState),
+    final AppUser user = Provider.of<UserProvider>(context).getUser;
+
+    return AlertDialog(
+      content: _file == null
+          ? SizedBox(
+              height: 300,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: FittedBox(
+                      fit: BoxFit.fill,
+                      child: IconButton(
+                        onPressed: () => _selectImage(context),
                         icon: const Icon(Icons.photo),
                       ),
-                      TextField(
-                        controller: textFieldController,
-                        decoration:
-                            const InputDecoration(hintText: "Meal Name"),
-                      ),
-                    ],
+                    ),
                   ),
-                  actions: <Widget>[
-                    MaterialButton(
-                      child: const Text('CANCEL'),
-                      onPressed: () {
-                        setState(() {
-                          textFieldController.text = "";
-                          _imageFile = null;
-                          Navigator.pop(context);
-                        });
-                      },
+                  TextField(
+                    controller: _mealController,
+                    decoration: const InputDecoration(hintText: "Meal Name"),
+                  ),
+                ],
+              ),
+            )
+          : SizedBox(
+              height: 300,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: MemoryImage(_file!),
+                          fit: BoxFit.contain,
+                          alignment: FractionalOffset.topCenter,
+                        ),
+                      ),
                     ),
-                    MaterialButton(
-                      child: const Text('OK'),
-                      onPressed: () {
-                        setState(() {
-                          FirebaseFirestore.instance.collection('data').add(
-                            {
-                              'meal': widget.docMeal,
-                              'text': textFieldController.text,
-                            },
-                          );
-                          _uploadImage();
-                          textFieldController.text = "";
-                          _imageFile = null;
-                          Navigator.pop(context);
-                        });
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
+                  ),
+                  TextField(
+                    controller: _mealController,
+                    decoration: const InputDecoration(hintText: "Meal Name"),
+                  ),
+                ],
+              ),
+            ),
+      actions: <Widget>[
+        MaterialButton(
+          child: const Text('CANCEL'),
+          onPressed: () {
+            Navigator.pop(context);
+            setState(() {
+              _mealController.text = "";
+              _file = null;
+            });
           },
-        );
-      },
+        ),
+        MaterialButton(
+          child: const Text('OK'),
+          onPressed: () {
+            postImage(user.uid, user.uid);
+          },
+        ),
+      ],
     );
+    // return AlertDialog(
+    //               content: Column(
+    //                 children: [
+    //                   Expanded(
+    //                     flex: 3,
+    //                     child: _displayCorrectImage(),
+    //                   ),
+    //                   IconButton(
+    //                     onPressed: () => _pickImage(setState_: setState),
+    //                     icon: const Icon(Icons.photo),
+    //                   ),
+    //                   TextField(
+    //                     controller: textFieldController,
+    //                     decoration:
+    //                         const InputDecoration(hintText: "Meal Name"),
+    //                   ),
+    //                 ],
+    //               ),
+    //               actions: <Widget>[
+    //                 MaterialButton(
+    //                   child: const Text('CANCEL'),
+    //                   onPressed: () {
+    //                     setState(() {
+    //                       textFieldController.text = "";
+    //                       _imageFile = null;
+    //                       Navigator.pop(context);
+    //                     });
+    //                   },
+    //                 ),
+    //                 MaterialButton(
+    //                   child: const Text('OK'),
+    //                   onPressed: () {
+    //                     setState(() {
+    //                       FirebaseFirestore.instance.collection('data').add(
+    //                         {
+    //                           'meal': widget.docMeal,
+    //                           'text': textFieldController.text,
+    //                         },
+    //                       );
+    //                       _uploadImage();
+    //                       textFieldController.text = "";
+    //                       _imageFile = null;
+    //                       Navigator.pop(context);
+    //                     });
+    //                   },
+    //                 ),
+    //               ],
+    //             );
   }
 }
