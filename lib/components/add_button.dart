@@ -23,10 +23,7 @@ class _AddButtonState extends State<AddButton> {
   Uint8List? _file;
   final TextEditingController _mealController = TextEditingController();
 
-  void postImage(
-    String foodId,
-    String uid,
-  ) async {
+  void postImage(String uid) async {
     try {
       String res = await FirestoreMethods().uploadFood(
         widget.docMeal,
@@ -170,7 +167,7 @@ class _AddButtonState extends State<AddButton> {
         MaterialButton(
           child: const Text('OK'),
           onPressed: () {
-            postImage(user.uid, user.uid);
+            postImage(user.uid);
           },
         ),
       ],
