@@ -43,8 +43,9 @@ class MyApp extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
                 return const ResponsiveLayout(
-                  mobileScreenLayout: MobileScreenLayout(title: "Mobile"),
-                  webScreenLayout: WebScreenLayout(),
+                  mobileScreenLayout:
+                      MobileScreenLayout(title: "Meal Selection"),
+                  webScreenLayout: WebScreenLayout(title: "Meal Selection"),
                 );
               } else if (snapshot.hasError) {
                 return Center(
@@ -67,7 +68,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/home': (context) => const ResponsiveLayout(
                 mobileScreenLayout: MobileScreenLayout(title: "Meal Selection"),
-                webScreenLayout: WebScreenLayout(),
+                webScreenLayout: WebScreenLayout(title: "Meal Selection"),
               ),
         },
       ),

@@ -61,8 +61,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
-            mobileScreenLayout: MobileScreenLayout(title: "Mobile"),
-            webScreenLayout: WebScreenLayout(),
+            mobileScreenLayout: MobileScreenLayout(title: "Meal Selection"),
+            webScreenLayout: WebScreenLayout(title: "Meal Selection"),
           ),
         ),
       );

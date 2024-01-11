@@ -134,27 +134,40 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         ],
                       ),
                       Container(),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(vertical: 10),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: mobileBackgroundColor,
-                              border: Border.all(
-                                color: mobileSearchColor,
+                          TextButton(
+                            onPressed: () async {
+                              await AuthMethods().signOut();
+                              if (context.mounted) {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen(),
+                                  ),
+                                );
+                              }
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: redColor,
+                                border: Border.all(
+                                  color: mobileSearchColor,
+                                ),
+                                borderRadius: BorderRadius.circular(5),
                               ),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            alignment: Alignment.center,
-                            width: 250,
-                            height: 40,
-                            child: Text(
-                              'Sign Out',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                              alignment: Alignment.center,
+                              width: 250,
+                              height: 40,
+                              child: const Text(
+                                'Sign Out',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
