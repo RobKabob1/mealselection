@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mealselection/components/add_button.dart';
 import 'package:mealselection/resources/get_random_food.dart';
+import 'package:mealselection/screens/user_profile_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/widgets/food_card.dart';
 
@@ -51,26 +53,9 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute<ProfileScreen>(
-                  builder: (context) => ProfileScreen(
-                    appBar: AppBar(
-                      title: const Text('User Profile'),
-                    ),
-                    actions: [
-                      SignedOutAction((context) {
-                        Navigator.of(context).pop();
-                      })
-                    ],
-                    children: [
-                      const Divider(),
-                      Padding(
-                        padding: const EdgeInsets.all(2),
-                        child: AspectRatio(
-                          aspectRatio: 1,
-                          child: Image.asset('images/icons/web.png'),
-                        ),
-                      ),
-                    ],
+                MaterialPageRoute(
+                  builder: (context) => UserProfileScreen(
+                    uid: FirebaseAuth.instance.currentUser!.uid,
                   ),
                 ),
               );

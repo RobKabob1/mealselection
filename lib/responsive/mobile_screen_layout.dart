@@ -1,8 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/get_random_food.dart';
 import 'package:mealselection/utils/colors.dart';
+import 'package:mealselection/screens/user_profile_screen.dart';
 
 class MobileScreenLayout extends StatefulWidget {
   final String title;
@@ -32,26 +33,9 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute<ProfileScreen>(
-                  builder: (context) => ProfileScreen(
-                    appBar: AppBar(
-                      title: const Text('User Profile'),
-                    ),
-                    actions: [
-                      SignedOutAction((context) {
-                        Navigator.of(context).pop();
-                      })
-                    ],
-                    children: [
-                      const Divider(),
-                      Padding(
-                        padding: const EdgeInsets.all(2),
-                        child: AspectRatio(
-                          aspectRatio: 1,
-                          child: Image.asset('images/icons/web.png'),
-                        ),
-                      ),
-                    ],
+                MaterialPageRoute(
+                  builder: (context) => UserProfileScreen(
+                    uid: FirebaseAuth.instance.currentUser!.uid,
                   ),
                 ),
               );
