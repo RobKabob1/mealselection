@@ -1,10 +1,3 @@
-// theme: ThemeData(
-//   colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
-//   useMaterial3: true,
-//   shadowColor: Colors.transparent,
-//   canvasColor: Colors.transparent,
-// ),
-
 import 'package:flutter/material.dart';
 
 const mobileBackgroundColor = Color.fromRGBO(0, 0, 0, 1);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mealselection/providers/user_provider.dart';
 import 'package:mealselection/utils/global_variables.dart';
 import 'package:provider/provider.dart';

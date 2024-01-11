@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mealselection/models/user.dart';
 import 'package:mealselection/resources/auth_methods.dart';
 

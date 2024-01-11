@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/auth_methods.dart';
 import 'package:mealselection/responsive/mobile_screen_layout.dart';

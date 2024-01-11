@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mealselection/responsive/mobile_screen_layout.dart';
 import 'package:mealselection/providers/user_provider.dart';
 import 'package:mealselection/resources/firebase_options.dart';
-
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
 import 'package:mealselection/responsive/web_screen_layout.dart';
 import 'package:mealselection/screens/login_screen.dart';
