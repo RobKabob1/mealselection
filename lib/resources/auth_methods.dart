@@ -24,24 +24,18 @@ class AuthMethods {
     required String email,
     required String password,
     required String username,
-    required String bio,
     required Uint8List file,
   }) async {
-    String res = "Some error Occurred";
+    String res = "Some error occurred";
     try {
-      if (email.isNotEmpty ||
-          password.isNotEmpty ||
-          username.isNotEmpty ||
-          bio.isNotEmpty) {
+      if (email.isNotEmpty || password.isNotEmpty || username.isNotEmpty) {
         // registering user in auth with email and password
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
-
         String photoUrl = await StorageMethods()
             .uploadImageToStorage('profilePics', file, false);
-
         AppUser user = AppUser(
           email: email,
           uid: cred.user!.uid,
@@ -53,7 +47,6 @@ class AuthMethods {
             .collection("users")
             .doc(cred.user!.email)
             .set(user.toJson());
-
         res = "success";
       } else {
         res = "Please enter all the fields";

@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mealselection/resources/auth_methods.dart';
 import 'package:mealselection/responsive/mobile_screen_layout.dart';
@@ -10,9 +10,6 @@ import 'package:mealselection/screens/login_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 import 'package:mealselection/widgets/text_field_input.dart';
-
-//TODO Bug: sign up with no picture
-//TODO Bug: Sign Up from camera or gallery
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -87,14 +84,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {
       _isLoading = true;
     });
-
-    String res = await AuthMethods().signUpUser(
-      email: _emailController.text,
-      password: _passwordController.text,
-      username: _usernameController.text,
-      bio: _bioController.text,
-      file: _image!,
-    );
+    String res = '';
+    if (_image == null) {
+      res = 'Please choose an image';
+    } else {
+      res = await AuthMethods().signUpUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+        username: _usernameController.text,
+        file: _image!,
+      );
+    }
 
     if (res != 'success') {
       showSnackBar(res, context);
@@ -150,7 +150,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       : const CircleAvatar(
                           radius: 64,
                           backgroundImage: NetworkImage(
-                              'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'),
+                              'https://firebasestorage.googleapis.com/v0/b/mealselection.appspot.com/o/defaultPics%2Fempty_profile.jpg?alt=media&token=6861c5a4-ef3b-4820-85e2-e37c329f032a'),
                         ),
                   Positioned(
                     bottom: -10,

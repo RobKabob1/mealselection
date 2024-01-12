@@ -24,26 +24,35 @@ class _AddButtonState extends State<AddButton> {
   final TextEditingController _mealController = TextEditingController();
 
   void postImage(String uid) async {
-    try {
-      String res = await FirestoreMethods().uploadFood(
-        widget.docMeal,
-        _mealController.text,
-        _file!,
-        uid,
-      );
+    String res;
+    if (_file == null) {
+      res = 'Please choose an image';
+      showSnackBar(res, context);
+    } else if (_mealController.text.isEmpty) {
+      res = "Please enter a meal name";
+      showSnackBar(res, context);
+    } else {
+      try {
+        res = await FirestoreMethods().uploadFood(
+          widget.docMeal,
+          _mealController.text,
+          _file!,
+          uid,
+        );
 
-      if (res == "success") {
-        setState(() {});
-        showSnackBar('Posted!', context);
-        clearImage();
-      } else {
-        setState(() {});
-        showSnackBar(res, context);
+        if (res == "success") {
+          setState(() {});
+          showSnackBar('Posted!', context);
+          clearImage();
+        } else {
+          setState(() {});
+          showSnackBar(res, context);
+        }
+      } catch (e) {
+        showSnackBar(e.toString(), context);
       }
-    } catch (e) {
-      showSnackBar(e.toString(), context);
+      Navigator.pop(context);
     }
-    Navigator.pop(context);
   }
 
   _selectImage(BuildContext context) async {
