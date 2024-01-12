@@ -11,6 +11,9 @@ import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 import 'package:mealselection/widgets/text_field_input.dart';
 
+//TODO Bug: sign up with no picture
+//TODO Bug: Sign Up from camera or gallery
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -35,13 +38,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _usernameController.dispose();
   }
 
-  void selectImage() async {
-    Uint8List? im = await pickImage(ImageSource.gallery);
-    setState(() {
-      if (im != null) {
-        _image = im;
-      }
-    });
+  _selectImage(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: const Text('Create a post'),
+            children: [
+              SimpleDialogOption(
+                padding: const EdgeInsets.all(20),
+                child: const Text('Take a photo'),
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  Uint8List? file = await pickImage(ImageSource.camera);
+                  setState(() {
+                    if (file != null) {
+                      _image = file;
+                    }
+                  });
+                },
+              ),
+              SimpleDialogOption(
+                padding: const EdgeInsets.all(20),
+                child: const Text('Choose from gallery'),
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  Uint8List? file = await pickImage(ImageSource.gallery);
+                  setState(() {
+                    if (file != null) {
+                      _image = file;
+                    }
+                  });
+                },
+              ),
+              SimpleDialogOption(
+                padding: const EdgeInsets.all(20),
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
   }
 
   void signUpUser() async {
@@ -117,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     bottom: -10,
                     left: 80,
                     child: IconButton(
-                      onPressed: selectImage,
+                      onPressed: () => _selectImage(context),
                       icon: const Icon(Icons.add_a_photo),
                     ),
                   ),

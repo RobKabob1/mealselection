@@ -35,7 +35,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => UserProfileScreen(
-                    uid: FirebaseAuth.instance.currentUser!.uid,
+                    email: FirebaseAuth.instance.currentUser!.email!,
                   ),
                 ),
               );

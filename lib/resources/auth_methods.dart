@@ -13,7 +13,7 @@ class AuthMethods {
     User currentUser = _auth.currentUser!;
 
     DocumentSnapshot documentSnapshot =
-        await _firestore.collection('users').doc(currentUser.uid).get();
+        await _firestore.collection('users').doc(currentUser.email).get();
 
     return AppUser.fromSnap(documentSnapshot);
   }
@@ -51,7 +51,7 @@ class AuthMethods {
         // adding user in our database
         await _firestore
             .collection("users")
-            .doc(cred.user!.uid)
+            .doc(cred.user!.email)
             .set(user.toJson());
 
         res = "success";

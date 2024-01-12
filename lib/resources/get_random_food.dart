@@ -1,10 +1,12 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/screens/meal_menu_screen.dart';
 
 class RandomFood {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void getRandomFoodAndGo(
     context,
@@ -17,6 +19,8 @@ class RandomFood {
 
     try {
       await _firestore
+          .collection('users')
+          .doc(_auth.currentUser!.email)
           .collection('food')
           .where('meal', isEqualTo: meal)
           .get()

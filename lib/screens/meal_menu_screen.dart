@@ -54,7 +54,7 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => UserProfileScreen(
-                    uid: FirebaseAuth.instance.currentUser!.uid,
+                    email: FirebaseAuth.instance.currentUser!.email!,
                   ),
                 ),
               );
@@ -122,6 +122,8 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(FirebaseAuth.instance.currentUser!.email)
                     .collection('food')
                     .where('meal', isEqualTo: widget.meal)
                     .snapshots(),

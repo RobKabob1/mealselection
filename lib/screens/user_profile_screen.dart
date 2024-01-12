@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/auth_methods.dart';
 import 'package:mealselection/screens/login_screen.dart';
@@ -7,8 +8,8 @@ import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  final String uid;
-  const UserProfileScreen({Key? key, required this.uid}) : super(key: key);
+  final String email;
+  const UserProfileScreen({Key? key, required this.email}) : super(key: key);
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
@@ -33,13 +34,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     try {
       var userSnap = await FirebaseFirestore.instance
           .collection('users')
-          .doc(widget.uid)
+          .doc(widget.email)
           .get();
 
       // get food list lengtch
       var foodSnap = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.email)
           .collection('food')
-          .where('uid', isEqualTo: widget.uid)
           .get();
 
       foodLen = foodSnap.docs.length;
@@ -179,8 +181,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 const Divider(),
                 FutureBuilder(
                   future: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(FirebaseAuth.instance.currentUser!.email)
                       .collection('food')
-                      .where('uid', isEqualTo: widget.uid)
                       .get(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {

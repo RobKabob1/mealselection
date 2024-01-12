@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mealselection/models/food.dart';
 import 'package:mealselection/resources/storage_methods.dart';
 import 'package:uuid/uuid.dart';
@@ -29,7 +30,12 @@ class FirestoreMethods {
         uid: uid,
       );
 
-      await _firestore.collection('food').doc(foodId).set(post.toJson());
+      await _firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('food')
+          .doc(foodId)
+          .set(post.toJson());
       res = "success";
     } catch (err) {
       res = err.toString();
@@ -43,7 +49,12 @@ class FirestoreMethods {
   ) async {
     String res = "some error occurred";
     try {
-      await _firestore.collection('food').doc(foodId).update({
+      await _firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('food')
+          .doc(foodId)
+          .update({
         'foodName': foodName,
       });
       res = "success";
@@ -59,7 +70,12 @@ class FirestoreMethods {
   ) async {
     String res = "some error occurred";
     try {
-      await _firestore.collection('food').doc(foodId).delete();
+      await _firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('food')
+          .doc(foodId)
+          .delete();
       await StorageMethods().deleteImageInStorage(foodUrl);
       res = "success";
     } catch (err) {
