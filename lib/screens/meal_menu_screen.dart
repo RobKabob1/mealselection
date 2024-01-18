@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mealselection/components/add_button.dart';
 import 'package:mealselection/resources/get_random_food.dart';
 import 'package:mealselection/screens/user_profile_screen.dart';
@@ -69,14 +68,10 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
               children: [
                 widget.foodUrl == ''
                     ? Expanded(
-                        child: SvgPicture.asset(
-                          'images/icons/image-outline.svg',
-                          colorFilter: const ColorFilter.mode(
-                              primaryColor, BlendMode.srcIn),
-                          height: 300,
-                          fit: BoxFit.fitHeight,
-                        ),
-                      )
+                        child: Image.network(
+                            'https://firebasestorage.googleapis.com/v0/b/mealselection.appspot.com/o/defaultPics%2Fno_food.jpg?alt=media&token=45179c12-3f5f-4f1d-a298-d777073d6258',
+                            height: 300,
+                            fit: BoxFit.fitHeight))
                     : Expanded(
                         child: Image.network(widget.foodUrl,
                             height: 300, fit: BoxFit.fitHeight),
