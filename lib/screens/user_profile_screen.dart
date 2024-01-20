@@ -9,7 +9,7 @@ import 'package:mealselection/utils/utils.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final String email;
-  const UserProfileScreen({Key? key, required this.email}) : super(key: key);
+  const UserProfileScreen({super.key, required this.email});
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
