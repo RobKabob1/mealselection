@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mealselection/models/user.dart';
+import 'package:mealselection/resources/firestore_methods.dart';
 import 'package:mealselection/resources/storage_methods.dart';
 
 class AuthMethods {
@@ -19,7 +20,6 @@ class AuthMethods {
   }
 
   // Signing Up User
-
   Future<String> signUpUser({
     required String email,
     required String password,
@@ -34,6 +34,7 @@ class AuthMethods {
           email: email,
           password: password,
         );
+        // add profile image
         String photoUrl = await StorageMethods()
             .uploadImageToStorage('profilePics', file, false);
         AppUser user = AppUser(
@@ -41,8 +42,7 @@ class AuthMethods {
           uid: cred.user!.uid,
           photoUrl: photoUrl,
         );
-
-        // adding user in our database
+        // add user in our database
         await _firestore
             .collection("users")
             .doc(cred.user!.email)
@@ -82,5 +82,43 @@ class AuthMethods {
 
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  Future<String> deleteUserAccount() async {
+    String res = "Some error Occurred";
+    try {
+      // delete user's profile picture in Storage
+      await StorageMethods().deleteProfileImageInStorage();
+      // delete user's foods
+      // Firebase won't let you delete an entire folder, so we have to iterate through each of the pictures
+      // you have to delete the picture in Storage AND delete the food's Firestore Database doc
+      await _firestore
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection("food")
+          .get()
+          .then(
+        (querySnapshot) async {
+          for (var docSnapshot in querySnapshot.docs) {
+            await FirestoreMethods().deleteFoodName(
+              docSnapshot['foodId'],
+              docSnapshot['foodUrl'],
+            );
+          }
+        },
+      );
+      // delete user main Firestore Database doc
+      await _firestore
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .delete();
+      // delete user's profile in Authentication
+      await FirebaseAuth.instance.currentUser!.delete();
+
+      res = "success";
+    } catch (e) {
+      return e.toString();
+    }
+    return res;
   }
 }

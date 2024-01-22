@@ -175,6 +175,60 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           ),
                         ],
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TextButton(
+                            onPressed: () => showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('Account Deletion'),
+                                    content: const Text('Are you sure?'),
+                                    actions: <Widget>[
+                                      MaterialButton(
+                                        child: const Text('CANCEL'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      MaterialButton(
+                                        child: const Text('OK'),
+                                        onPressed: () {
+                                          AuthMethods().deleteUserAccount();
+                                          Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const LoginScreen(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                }),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                //color: redColor,
+                                border: Border.all(
+                                  color: mobileSearchColor,
+                                ),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              alignment: Alignment.center,
+                              width: 250,
+                              height: 40,
+                              child: const Text(
+                                'Delete Account',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),

@@ -32,4 +32,13 @@ class StorageMethods {
     await ref.delete();
     return "completed deletion";
   }
+
+  Future<String> deleteProfileImageInStorage() async {
+    // Create a reference to the file to delete
+    final profileRef =
+        _storage.ref().child("profilePics/${_auth.currentUser!.email!}");
+    // Delete the file
+    await profileRef.delete();
+    return "completed deletion";
+  }
 }
