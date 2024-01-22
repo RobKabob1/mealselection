@@ -145,6 +145,10 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
                             snap: snapshot.data!.docs[index].data(),
                             meal: widget.meal,
                             title: widget.title,
+                            selected: (widget.foodUrl ==
+                                    snapshot.data!.docs[index]['foodUrl'])
+                                ? true
+                                : false,
                           ),
                         );
                 },

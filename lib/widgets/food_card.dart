@@ -9,9 +9,14 @@ class FoodCard extends StatefulWidget {
   final snap;
   final String meal;
   final String title;
+  final bool selected;
 
   const FoodCard(
-      {super.key, required this.snap, required this.meal, required this.title});
+      {super.key,
+      required this.snap,
+      required this.meal,
+      required this.title,
+      required this.selected});
 
   @override
   State<FoodCard> createState() => _FoodCardState();
@@ -42,7 +47,7 @@ class _FoodCardState extends State<FoodCard> {
   Widget build(BuildContext context) {
     return Card(
       key: Key(widget.snap['foodId']),
-      color: cardColor,
+      color: widget.selected ? selectedCardColor : cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),

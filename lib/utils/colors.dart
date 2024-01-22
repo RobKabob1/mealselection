@@ -8,3 +8,4 @@ const redColor = Color.fromARGB(197, 248, 1, 1);
 const primaryColor = Colors.white;
 const secondaryColor = Colors.grey;
 const cardColor = Color.fromARGB(66, 78, 76, 76);
+const selectedCardColor = Color.fromARGB(232, 23, 172, 4);
