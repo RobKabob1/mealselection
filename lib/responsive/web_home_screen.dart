@@ -1,59 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/get_random_food.dart';
+import 'package:mealselection/responsive/responsive_layout_screen.dart';
 import 'package:mealselection/screens/oboarding_screen.dart';
 import 'package:mealselection/screens/user_profile_screen.dart';
+import 'package:mealselection/screens/web_onboarding_screen.dart';
+import 'package:mealselection/screens/web_user_profile_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 
-class WebScreenLayout extends StatefulWidget {
+class WebHomeScreen extends StatefulWidget {
   final String title;
-  const WebScreenLayout({super.key, required this.title});
+  const WebHomeScreen({super.key, required this.title});
 
   @override
-  State<WebScreenLayout> createState() => _WebScreenLayoutState();
+  State<WebHomeScreen> createState() => _WebHomeScreenState();
 }
 
-class _WebScreenLayoutState extends State<WebScreenLayout> {
+class _WebHomeScreenState extends State<WebHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: mobileBackgroundColor,
-        title: Text(
-          widget.title,
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 25,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.question_mark_sharp),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const OnboardingScreen(),
-                ),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.account_circle_rounded),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => UserProfileScreen(
-                    email: FirebaseAuth.instance.currentUser!.email!,
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
       body: Row(
         children: [
           Flexible(child: Container()),
@@ -61,6 +27,51 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
             width: 600,
             child: Column(
               children: [
+                AppBar(
+                  backgroundColor: mobileBackgroundColor,
+                  title: Text(
+                    widget.title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 25,
+                    ),
+                  ),
+                  centerTitle: true,
+                  actions: [
+                    IconButton(
+                      icon: const Icon(Icons.question_mark_sharp),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ResponsiveLayout(
+                              mobileScreenLayout: OnboardingScreen(),
+                              webScreenLayout: WebOnboardingScreen(),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.account_circle_rounded),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ResponsiveLayout(
+                              mobileScreenLayout: UserProfileScreen(
+                                  email: FirebaseAuth
+                                      .instance.currentUser!.email!),
+                              webScreenLayout: WebUserProfileScreen(
+                                  email: FirebaseAuth
+                                      .instance.currentUser!.email!),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
                 //breakfast
                 Expanded(
                   child: Container(

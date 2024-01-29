@@ -1,10 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/auth_methods.dart';
-import 'package:mealselection/responsive/mobile_screen_layout.dart';
+import 'package:mealselection/responsive/mobile_home_screen.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/responsive/web_screen_layout.dart';
+import 'package:mealselection/responsive/web_home_screen.dart';
 import 'package:mealselection/screens/signup_screen.dart';
+import 'package:mealselection/screens/web_signup_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 import 'package:mealselection/widgets/text_field_input.dart';
@@ -42,8 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
-            mobileScreenLayout: MobileScreenLayout(title: "Meal Selection"),
-            webScreenLayout: WebScreenLayout(title: "Meal Selection"),
+            mobileScreenLayout: MobileHomeScreen(title: "Meal Selection"),
+            webScreenLayout: WebHomeScreen(title: "Meal Selection"),
           ),
         ),
       );
@@ -60,7 +61,10 @@ class _LoginScreenState extends State<LoginScreen> {
   void navigateToSignup() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const SignUpScreen(),
+        builder: (context) => const ResponsiveLayout(
+          mobileScreenLayout: SignUpScreen(),
+          webScreenLayout: WebSignUpScreen(),
+        ),
       ),
     );
   }

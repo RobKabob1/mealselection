@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mealselection/responsive/mobile_screen_layout.dart';
+import 'package:mealselection/responsive/mobile_home_screen.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/responsive/web_screen_layout.dart';
+import 'package:mealselection/responsive/web_home_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -19,8 +19,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (_) => const ResponsiveLayout(
-          mobileScreenLayout: MobileScreenLayout(title: "Meal Selection"),
-          webScreenLayout: WebScreenLayout(title: "Meal Selection"),
+          mobileScreenLayout: MobileHomeScreen(title: "Meal Selection"),
+          webScreenLayout: WebHomeScreen(title: "Meal Selection"),
         ),
       ),
     );

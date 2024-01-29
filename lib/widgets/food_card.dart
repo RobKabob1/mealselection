@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:mealselection/components/edit_button.dart';
 import 'package:mealselection/resources/firestore_methods.dart';
+import 'package:mealselection/responsive/responsive_layout_screen.dart';
 import 'package:mealselection/screens/meal_menu_screen.dart';
+import 'package:mealselection/screens/web_meal_menu_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 
 class FoodCard extends StatefulWidget {
@@ -56,11 +58,19 @@ class _FoodCardState extends State<FoodCard> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MealMenuScreen(
-                foodName: widget.snap['foodName'],
-                foodUrl: widget.snap['foodUrl'],
-                title: widget.title,
-                meal: widget.meal,
+              builder: (context) => ResponsiveLayout(
+                mobileScreenLayout: MealMenuScreen(
+                  foodName: widget.snap['foodName'],
+                  foodUrl: widget.snap['foodUrl'],
+                  title: widget.title,
+                  meal: widget.meal,
+                ),
+                webScreenLayout: WebMealMenuScreen(
+                  foodName: widget.snap['foodName'],
+                  foodUrl: widget.snap['foodUrl'],
+                  title: widget.title,
+                  meal: widget.meal,
+                ),
               ),
             ),
           );

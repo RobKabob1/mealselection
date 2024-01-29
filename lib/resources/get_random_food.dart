@@ -2,7 +2,9 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mealselection/responsive/responsive_layout_screen.dart';
 import 'package:mealselection/screens/meal_menu_screen.dart';
+import 'package:mealselection/screens/web_meal_menu_screen.dart';
 
 class RandomFood {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -44,11 +46,19 @@ class RandomFood {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => MealMenuScreen(
-          foodUrl: randomFoodUrl,
-          foodName: randomFood,
-          title: meal,
-          meal: meal,
+        builder: (context) => ResponsiveLayout(
+          mobileScreenLayout: MealMenuScreen(
+            foodUrl: randomFoodUrl,
+            foodName: randomFood,
+            title: meal,
+            meal: meal,
+          ),
+          webScreenLayout: WebMealMenuScreen(
+            foodUrl: randomFoodUrl,
+            foodName: randomFood,
+            title: meal,
+            meal: meal,
+          ),
         ),
       ),
     );

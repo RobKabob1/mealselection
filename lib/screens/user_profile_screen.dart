@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/auth_methods.dart';
+import 'package:mealselection/responsive/responsive_layout_screen.dart';
 import 'package:mealselection/screens/login_screen.dart';
+import 'package:mealselection/screens/web_login_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 
@@ -148,7 +150,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               if (context.mounted) {
                                 Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                    builder: (context) => const LoginScreen(),
+                                    builder: (context) =>
+                                        const ResponsiveLayout(
+                                      mobileScreenLayout: LoginScreen(),
+                                      webScreenLayout: WebLoginScreen(),
+                                    ),
                                   ),
                                 );
                               }
@@ -199,7 +205,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                           Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  const LoginScreen(),
+                                                  const ResponsiveLayout(
+                                                mobileScreenLayout:
+                                                    LoginScreen(),
+                                                webScreenLayout:
+                                                    WebLoginScreen(),
+                                              ),
                                             ),
                                           );
                                         },

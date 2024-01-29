@@ -2,19 +2,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/get_random_food.dart';
+import 'package:mealselection/responsive/responsive_layout_screen.dart';
 import 'package:mealselection/screens/oboarding_screen.dart';
+import 'package:mealselection/screens/web_onboarding_screen.dart';
+import 'package:mealselection/screens/web_user_profile_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/screens/user_profile_screen.dart';
 
-class MobileScreenLayout extends StatefulWidget {
+class MobileHomeScreen extends StatefulWidget {
   final String title;
-  const MobileScreenLayout({super.key, required this.title});
+  const MobileHomeScreen({super.key, required this.title});
 
   @override
-  State<MobileScreenLayout> createState() => _MobileScreenLayoutState();
+  State<MobileHomeScreen> createState() => _MobileHomeScreenState();
 }
 
-class _MobileScreenLayoutState extends State<MobileScreenLayout> {
+class _MobileHomeScreenState extends State<MobileHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +38,10 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const OnboardingScreen(),
+                  builder: (context) => const ResponsiveLayout(
+                    mobileScreenLayout: OnboardingScreen(),
+                    webScreenLayout: WebOnboardingScreen(),
+                  ),
                 ),
               );
             },
@@ -46,8 +52,11 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => UserProfileScreen(
-                    email: FirebaseAuth.instance.currentUser!.email!,
+                  builder: (context) => ResponsiveLayout(
+                    mobileScreenLayout: UserProfileScreen(
+                        email: FirebaseAuth.instance.currentUser!.email!),
+                    webScreenLayout: WebUserProfileScreen(
+                        email: FirebaseAuth.instance.currentUser!.email!),
                   ),
                 ),
               );
