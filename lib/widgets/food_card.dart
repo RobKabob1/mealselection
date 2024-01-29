@@ -72,8 +72,11 @@ class _FoodCardState extends State<FoodCard> {
               child: SizedBox(
                 height: 50,
                 child: Container(
+                  //constraints: const BoxConstraints.expand(),
                   alignment: Alignment.center,
+                  padding: const EdgeInsets.only(left: 5),
                   child: Text(widget.snap['foodName'],
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 20)),
                 ),
               ),
