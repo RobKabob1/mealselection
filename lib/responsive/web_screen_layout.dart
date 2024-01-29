@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/get_random_food.dart';
+import 'package:mealselection/screens/oboarding_screen.dart';
 import 'package:mealselection/screens/user_profile_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 
@@ -27,6 +28,17 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
         ),
         centerTitle: true,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.question_mark_sharp),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const OnboardingScreen(),
+                ),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.account_circle_rounded),
             onPressed: () {
