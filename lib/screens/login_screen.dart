@@ -6,6 +6,7 @@ import 'package:mealselection/responsive/responsive_layout_screen.dart';
 import 'package:mealselection/responsive/web_home_screen.dart';
 import 'package:mealselection/screens/forgot_password_screen.dart';
 import 'package:mealselection/screens/signup_screen.dart';
+import 'package:mealselection/screens/web_forgot_password_screen.dart';
 import 'package:mealselection/screens/web_signup_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
@@ -137,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   MaterialPageRoute(
                     builder: (context) => const ResponsiveLayout(
                       mobileScreenLayout: ForgotPasswordScreen(),
-                      webScreenLayout: ForgotPasswordScreen(),
+                      webScreenLayout: WebForgotPasswordScreen(),
                     ),
                   ),
                 ),
