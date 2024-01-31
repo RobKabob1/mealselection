@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/firestore_methods.dart';
+import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 
 class EditButton extends StatefulWidget {
@@ -21,10 +22,14 @@ class EditButton extends StatefulWidget {
 
 class _EditButtonState extends State<EditButton> {
   final TextEditingController _textFieldController = TextEditingController();
+  bool _isLoading = false;
 
   void editFoodNameWithSnackBar(
     String foodName,
   ) async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String res = await FirestoreMethods().editFoodName(
         widget.docID,
@@ -42,6 +47,9 @@ class _EditButtonState extends State<EditButton> {
       showSnackBar(e.toString(), context);
     }
     Navigator.pop(context);
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   Future<void> displayTextInputDialog(BuildContext context) async {
@@ -62,12 +70,19 @@ class _EditButtonState extends State<EditButton> {
                 });
               },
             ),
-            MaterialButton(
-              child: const Text('OK'),
-              onPressed: () {
-                editFoodNameWithSnackBar(_textFieldController.text);
-              },
-            ),
+            _isLoading
+                ? MaterialButton(
+                    child: const CircularProgressIndicator(
+                      color: primaryColor,
+                    ),
+                    onPressed: () {},
+                  )
+                : MaterialButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      editFoodNameWithSnackBar(_textFieldController.text);
+                    },
+                  ),
           ],
         );
       },

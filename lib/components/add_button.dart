@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mealselection/models/user.dart';
 import 'package:mealselection/providers/user_provider.dart';
 import 'package:mealselection/resources/firestore_methods.dart';
+import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 import 'package:provider/provider.dart';
 
@@ -22,8 +23,13 @@ class AddButton extends StatefulWidget {
 class _AddButtonState extends State<AddButton> {
   Uint8List? _file;
   final TextEditingController _mealController = TextEditingController();
+  bool _isLoading = false;
 
   void postImage(String uid) async {
+    setState(() {
+      _isLoading = true;
+    });
+
     String res;
     if (_file == null) {
       res = 'Please choose an image';
@@ -53,6 +59,9 @@ class _AddButtonState extends State<AddButton> {
       }
       Navigator.pop(context);
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   _selectImage(BuildContext context) async {
@@ -171,12 +180,19 @@ class _AddButtonState extends State<AddButton> {
             });
           },
         ),
-        MaterialButton(
-          child: const Text('OK'),
-          onPressed: () {
-            postImage(user.uid);
-          },
-        ),
+        _isLoading
+            ? MaterialButton(
+                child: const CircularProgressIndicator(
+                  color: primaryColor,
+                ),
+                onPressed: () {},
+              )
+            : MaterialButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  postImage(user.uid);
+                },
+              ),
       ],
     );
   }
