@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mealselection/resources/auth_methods.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/login_screen.dart';
-import 'package:mealselection/screens/oboarding_screen.dart';
-import 'package:mealselection/screens/web_login_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_login_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_oboarding_screen.dart';
+import 'package:mealselection/screens/web/web_login_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 import 'package:mealselection/widgets/text_field_input.dart';
@@ -101,7 +101,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const OnboardingScreen(),
+          builder: (context) => const MobileOnboardingScreen(),
         ),
       );
     }
@@ -115,7 +115,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const ResponsiveLayout(
-          mobileScreenLayout: LoginScreen(),
+          mobileScreenLayout: MobileLoginScreen(),
           webScreenLayout: WebLoginScreen(),
         ),
       ),

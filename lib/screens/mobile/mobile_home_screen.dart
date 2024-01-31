@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/get_random_food.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/oboarding_screen.dart';
-import 'package:mealselection/screens/web_onboarding_screen.dart';
-import 'package:mealselection/screens/web_user_profile_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_oboarding_screen.dart';
+import 'package:mealselection/screens/web/web_onboarding_screen.dart';
+import 'package:mealselection/screens/web/web_user_profile_screen.dart';
 import 'package:mealselection/utils/colors.dart';
-import 'package:mealselection/screens/user_profile_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_user_profile_screen.dart';
 
 class MobileHomeScreen extends StatefulWidget {
   final String title;
@@ -39,7 +39,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const ResponsiveLayout(
-                    mobileScreenLayout: OnboardingScreen(),
+                    mobileScreenLayout: MobileOnboardingScreen(),
                     webScreenLayout: WebOnboardingScreen(),
                   ),
                 ),
@@ -53,7 +53,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ResponsiveLayout(
-                    mobileScreenLayout: UserProfileScreen(
+                    mobileScreenLayout: MobileUserProfileScreen(
                         email: FirebaseAuth.instance.currentUser!.email!),
                     webScreenLayout: WebUserProfileScreen(
                         email: FirebaseAuth.instance.currentUser!.email!),

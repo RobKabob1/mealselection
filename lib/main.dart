@@ -1,19 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mealselection/responsive/mobile_home_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_home_screen.dart';
 import 'package:mealselection/providers/user_provider.dart';
 import 'package:mealselection/resources/firebase_options.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/responsive/web_home_screen.dart';
-import 'package:mealselection/screens/login_screen.dart';
-import 'package:mealselection/screens/oboarding_screen.dart';
-import 'package:mealselection/screens/signup_screen.dart';
-import 'package:mealselection/screens/user_profile_screen.dart';
-import 'package:mealselection/screens/web_login_screen.dart';
-import 'package:mealselection/screens/web_onboarding_screen.dart';
-import 'package:mealselection/screens/web_signup_screen.dart';
-import 'package:mealselection/screens/web_user_profile_screen.dart';
+import 'package:mealselection/screens/web/web_home_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_login_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_oboarding_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_signup_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_user_profile_screen.dart';
+import 'package:mealselection/screens/web/web_login_screen.dart';
+import 'package:mealselection/screens/web/web_onboarding_screen.dart';
+import 'package:mealselection/screens/web/web_signup_screen.dart';
+import 'package:mealselection/screens/web/web_user_profile_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
               );
             }
             return const ResponsiveLayout(
-              mobileScreenLayout: LoginScreen(),
+              mobileScreenLayout: MobileLoginScreen(),
               webScreenLayout: WebLoginScreen(),
             );
           },
@@ -80,19 +80,19 @@ class MyApp extends StatelessWidget {
                 webScreenLayout: WebHomeScreen(title: "Meal Selection"),
               ),
           '/login': (context) => const ResponsiveLayout(
-                mobileScreenLayout: LoginScreen(),
+                mobileScreenLayout: MobileLoginScreen(),
                 webScreenLayout: WebLoginScreen(),
               ),
           '/signup': (context) => const ResponsiveLayout(
-                mobileScreenLayout: SignUpScreen(),
+                mobileScreenLayout: MobileSignUpScreen(),
                 webScreenLayout: WebSignUpScreen(),
               ),
           '/onboarding': (context) => const ResponsiveLayout(
-                mobileScreenLayout: OnboardingScreen(),
+                mobileScreenLayout: MobileOnboardingScreen(),
                 webScreenLayout: WebOnboardingScreen(),
               ),
           '/profile': (context) => ResponsiveLayout(
-                mobileScreenLayout: UserProfileScreen(
+                mobileScreenLayout: MobileUserProfileScreen(
                     email: FirebaseAuth.instance.currentUser!.email!),
                 webScreenLayout: WebUserProfileScreen(
                     email: FirebaseAuth.instance.currentUser!.email!),

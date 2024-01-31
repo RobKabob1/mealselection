@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mealselection/responsive/mobile_home_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_home_screen.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/responsive/web_home_screen.dart';
+import 'package:mealselection/screens/web/web_home_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 
-class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+class MobileOnboardingScreen extends StatefulWidget {
+  const MobileOnboardingScreen({super.key});
 
   @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
+  State<MobileOnboardingScreen> createState() => _MobileOnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _MobileOnboardingScreenState extends State<MobileOnboardingScreen> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {

@@ -4,20 +4,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/auth_methods.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/login_screen.dart';
-import 'package:mealselection/screens/web_login_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_login_screen.dart';
+import 'package:mealselection/screens/web/web_login_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 
-class UserProfileScreen extends StatefulWidget {
+class MobileUserProfileScreen extends StatefulWidget {
   final String email;
-  const UserProfileScreen({super.key, required this.email});
+  const MobileUserProfileScreen({super.key, required this.email});
 
   @override
-  State<UserProfileScreen> createState() => _UserProfileScreenState();
+  State<MobileUserProfileScreen> createState() =>
+      _MobileUserProfileScreenState();
 }
 
-class _UserProfileScreenState extends State<UserProfileScreen> {
+class _MobileUserProfileScreenState extends State<MobileUserProfileScreen> {
   var userData = {};
   int foodLen = 0;
 
@@ -152,7 +153,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   MaterialPageRoute(
                                     builder: (context) =>
                                         const ResponsiveLayout(
-                                      mobileScreenLayout: LoginScreen(),
+                                      mobileScreenLayout: MobileLoginScreen(),
                                       webScreenLayout: WebLoginScreen(),
                                     ),
                                   ),
@@ -207,7 +208,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                               builder: (context) =>
                                                   const ResponsiveLayout(
                                                 mobileScreenLayout:
-                                                    LoginScreen(),
+                                                    MobileLoginScreen(),
                                                 webScreenLayout:
                                                     WebLoginScreen(),
                                               ),

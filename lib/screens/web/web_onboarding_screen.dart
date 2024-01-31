@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mealselection/responsive/mobile_home_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_home_screen.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/responsive/web_home_screen.dart';
+import 'package:mealselection/screens/web/web_home_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 
 class WebOnboardingScreen extends StatefulWidget {

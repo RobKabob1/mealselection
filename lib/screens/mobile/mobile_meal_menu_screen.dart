@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:mealselection/components/add_button.dart';
 import 'package:mealselection/resources/get_random_food.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/user_profile_screen.dart';
-import 'package:mealselection/screens/web_user_profile_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_user_profile_screen.dart';
+import 'package:mealselection/screens/web/web_user_profile_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/widgets/food_card.dart';
 
-class MealMenuScreen extends StatefulWidget {
+class MobileMealMenuScreen extends StatefulWidget {
   final String foodName;
   final String foodUrl;
   final String title;
   final String meal;
 
-  const MealMenuScreen(
+  const MobileMealMenuScreen(
       {super.key,
       required this.foodName,
       required this.foodUrl,
@@ -23,10 +23,10 @@ class MealMenuScreen extends StatefulWidget {
       required this.meal});
 
   @override
-  State<MealMenuScreen> createState() => _MealMenuScreenState();
+  State<MobileMealMenuScreen> createState() => _MobileMealMenuScreenState();
 }
 
-class _MealMenuScreenState extends State<MealMenuScreen> {
+class _MobileMealMenuScreenState extends State<MobileMealMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +55,7 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ResponsiveLayout(
-                    mobileScreenLayout: UserProfileScreen(
+                    mobileScreenLayout: MobileUserProfileScreen(
                         email: FirebaseAuth.instance.currentUser!.email!),
                     webScreenLayout: WebUserProfileScreen(
                         email: FirebaseAuth.instance.currentUser!.email!),

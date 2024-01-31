@@ -4,22 +4,22 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mealselection/resources/auth_methods.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/login_screen.dart';
-import 'package:mealselection/screens/oboarding_screen.dart';
-import 'package:mealselection/screens/web_login_screen.dart';
-import 'package:mealselection/screens/web_onboarding_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_login_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_oboarding_screen.dart';
+import 'package:mealselection/screens/web/web_login_screen.dart';
+import 'package:mealselection/screens/web/web_onboarding_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 import 'package:mealselection/widgets/text_field_input.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class MobileSignUpScreen extends StatefulWidget {
+  const MobileSignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<MobileSignUpScreen> createState() => _MobileSignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _MobileSignUpScreenState extends State<MobileSignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
@@ -103,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
-            mobileScreenLayout: OnboardingScreen(),
+            mobileScreenLayout: MobileOnboardingScreen(),
             webScreenLayout: WebOnboardingScreen(),
           ),
         ),
@@ -119,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const ResponsiveLayout(
-          mobileScreenLayout: LoginScreen(),
+          mobileScreenLayout: MobileLoginScreen(),
           webScreenLayout: WebLoginScreen(),
         ),
       ),

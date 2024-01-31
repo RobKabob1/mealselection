@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mealselection/components/edit_button.dart';
 import 'package:mealselection/resources/firestore_methods.dart';
 import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/meal_menu_screen.dart';
-import 'package:mealselection/screens/web_meal_menu_screen.dart';
+import 'package:mealselection/screens/mobile/mobile_meal_menu_screen.dart';
+import 'package:mealselection/screens/web/web_meal_menu_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 
 class FoodCard extends StatefulWidget {
@@ -59,7 +59,7 @@ class _FoodCardState extends State<FoodCard> {
             context,
             MaterialPageRoute(
               builder: (context) => ResponsiveLayout(
-                mobileScreenLayout: MealMenuScreen(
+                mobileScreenLayout: MobileMealMenuScreen(
                   foodName: widget.snap['foodName'],
                   foodUrl: widget.snap['foodUrl'],
                   title: widget.title,
