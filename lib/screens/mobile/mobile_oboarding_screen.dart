@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mealselection/screens/mobile/mobile_home_screen.dart';
-import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/web/web_home_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 
 class MobileOnboardingScreen extends StatefulWidget {
@@ -16,14 +13,7 @@ class _MobileOnboardingScreenState extends State<MobileOnboardingScreen> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (_) => const ResponsiveLayout(
-          mobileScreenLayout: MobileHomeScreen(title: "Meal Selection"),
-          webScreenLayout: WebHomeScreen(title: "Meal Selection"),
-        ),
-      ),
-    );
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   Widget _buildImage(String assetName, [double width = 350]) {

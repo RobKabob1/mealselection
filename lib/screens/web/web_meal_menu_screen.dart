@@ -3,9 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/components/add_button.dart';
 import 'package:mealselection/resources/get_random_food.dart';
-import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/mobile/mobile_user_profile_screen.dart';
-import 'package:mealselection/screens/web/web_user_profile_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/widgets/food_card.dart';
 
@@ -58,21 +55,8 @@ class _WebMealMenuScreenState extends State<WebMealMenuScreen> {
                       ),
                       IconButton(
                         icon: const Icon(Icons.account_circle_rounded),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ResponsiveLayout(
-                                mobileScreenLayout: MobileUserProfileScreen(
-                                    email: FirebaseAuth
-                                        .instance.currentUser!.email!),
-                                webScreenLayout: WebUserProfileScreen(
-                                    email: FirebaseAuth
-                                        .instance.currentUser!.email!),
-                              ),
-                            ),
-                          );
-                        },
+                        onPressed: () =>
+                            Navigator.pushNamed(context, '/profile'),
                       ),
                     ],
                   ),

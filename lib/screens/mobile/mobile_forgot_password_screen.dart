@@ -1,9 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/auth_methods.dart';
-import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/mobile/mobile_login_screen.dart';
-import 'package:mealselection/screens/web/web_login_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 import 'package:mealselection/widgets/text_field_input.dart';
@@ -37,14 +34,7 @@ class _MobileForgotPasswordScreenState
     );
 
     if (res == "success") {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const ResponsiveLayout(
-            mobileScreenLayout: MobileLoginScreen(),
-            webScreenLayout: WebLoginScreen(),
-          ),
-        ),
-      );
+      Navigator.pushReplacementNamed(context, '/login');
       showSnackBar(
           "Password reset email sent to ${_emailController.text}.", context);
     } else {
@@ -113,14 +103,7 @@ class _MobileForgotPasswordScreenState
                 ),
               ),
               GestureDetector(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const ResponsiveLayout(
-                      mobileScreenLayout: MobileLoginScreen(),
-                      webScreenLayout: WebLoginScreen(),
-                    ),
-                  ),
-                ),
+                onTap: () => Navigator.pushNamed(context, '/login'),
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: const Text(

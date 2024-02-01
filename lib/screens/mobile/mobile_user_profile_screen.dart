@@ -3,9 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/auth_methods.dart';
-import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/mobile/mobile_login_screen.dart';
-import 'package:mealselection/screens/web/web_login_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 
@@ -149,15 +146,8 @@ class _MobileUserProfileScreenState extends State<MobileUserProfileScreen> {
                             onPressed: () async {
                               await AuthMethods().signOut();
                               if (context.mounted) {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ResponsiveLayout(
-                                      mobileScreenLayout: MobileLoginScreen(),
-                                      webScreenLayout: WebLoginScreen(),
-                                    ),
-                                  ),
-                                );
+                                Navigator.pushReplacementNamed(
+                                    context, '/login');
                               }
                             },
                             child: Container(
@@ -203,17 +193,8 @@ class _MobileUserProfileScreenState extends State<MobileUserProfileScreen> {
                                         child: const Text('OK'),
                                         onPressed: () {
                                           AuthMethods().deleteUserAccount();
-                                          Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ResponsiveLayout(
-                                                mobileScreenLayout:
-                                                    MobileLoginScreen(),
-                                                webScreenLayout:
-                                                    WebLoginScreen(),
-                                              ),
-                                            ),
-                                          );
+                                          Navigator.pushReplacementNamed(
+                                              context, '/login');
                                         },
                                       ),
                                     ],

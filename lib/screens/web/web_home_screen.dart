@@ -1,11 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/get_random_food.dart';
-import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/mobile/mobile_oboarding_screen.dart';
-import 'package:mealselection/screens/mobile/mobile_user_profile_screen.dart';
-import 'package:mealselection/screens/web/web_onboarding_screen.dart';
-import 'package:mealselection/screens/web/web_user_profile_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 
 class WebHomeScreen extends StatefulWidget {
@@ -41,34 +35,12 @@ class _WebHomeScreenState extends State<WebHomeScreen> {
                     IconButton(
                       icon: const Icon(Icons.question_mark_sharp),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ResponsiveLayout(
-                              mobileScreenLayout: MobileOnboardingScreen(),
-                              webScreenLayout: WebOnboardingScreen(),
-                            ),
-                          ),
-                        );
+                        Navigator.pushNamed(context, '/onboarding');
                       },
                     ),
                     IconButton(
                       icon: const Icon(Icons.account_circle_rounded),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ResponsiveLayout(
-                              mobileScreenLayout: MobileUserProfileScreen(
-                                  email: FirebaseAuth
-                                      .instance.currentUser!.email!),
-                              webScreenLayout: WebUserProfileScreen(
-                                  email: FirebaseAuth
-                                      .instance.currentUser!.email!),
-                            ),
-                          ),
-                        );
-                      },
+                      onPressed: () => Navigator.pushNamed(context, '/profile'),
                     ),
                   ],
                 ),

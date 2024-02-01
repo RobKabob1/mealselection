@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mealselection/resources/auth_methods.dart';
-import 'package:mealselection/responsive/responsive_layout_screen.dart';
-import 'package:mealselection/screens/mobile/mobile_login_screen.dart';
-import 'package:mealselection/screens/mobile/mobile_oboarding_screen.dart';
-import 'package:mealselection/screens/web/web_login_screen.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
 import 'package:mealselection/widgets/text_field_input.dart';
@@ -99,27 +95,12 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
     if (res != 'success') {
       showSnackBar(res, context);
     } else {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const MobileOnboardingScreen(),
-        ),
-      );
+      Navigator.pushReplacementNamed(context, '/onboarding');
     }
 
     setState(() {
       _isLoading = false;
     });
-  }
-
-  void navigateToLogin() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const ResponsiveLayout(
-          mobileScreenLayout: MobileLoginScreen(),
-          webScreenLayout: WebLoginScreen(),
-        ),
-      ),
-    );
   }
 
   @override
@@ -215,7 +196,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                       child: const Text("Have an account?"),
                     ),
                     GestureDetector(
-                      onTap: navigateToLogin,
+                      onTap: () => Navigator.pushNamed(context, '/login'),
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: const Text(
