@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mealselection/resources/auth_methods.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
+import 'package:mealselection/widgets/bottom_nav_bar.dart';
 
 class WebUserProfileScreen extends StatefulWidget {
   final String email;
@@ -79,15 +80,6 @@ class _WebUserProfileScreenState extends State<WebUserProfileScreen> {
                           ),
                         ),
                         centerTitle: true,
-                        actions: [
-                          IconButton(
-                            icon: const Icon(Icons.home),
-                            onPressed: () {
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                  '/home', (route) => false);
-                            },
-                          ),
-                        ],
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16),
@@ -268,7 +260,8 @@ class _WebUserProfileScreenState extends State<WebUserProfileScreen> {
                             },
                           );
                         },
-                      )
+                      ),
+                      const BottomNavBar(screenNumber: 3, meal: ''),
                     ],
                   ),
                 ),

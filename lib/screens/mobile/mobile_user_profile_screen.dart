@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mealselection/resources/auth_methods.dart';
 import 'package:mealselection/utils/colors.dart';
 import 'package:mealselection/utils/utils.dart';
+import 'package:mealselection/widgets/bottom_nav_bar.dart';
 
 class MobileUserProfileScreen extends StatefulWidget {
   final String email;
@@ -73,15 +74,6 @@ class _MobileUserProfileScreenState extends State<MobileUserProfileScreen> {
                 ),
               ),
               centerTitle: true,
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.home),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/home', (route) => false);
-                  },
-                ),
-              ],
             ),
             body: ListView(
               children: [
@@ -265,6 +257,7 @@ class _MobileUserProfileScreenState extends State<MobileUserProfileScreen> {
                 )
               ],
             ),
+            bottomNavigationBar: const BottomNavBar(screenNumber: 3, meal: ''),
           );
   }
 

@@ -24,6 +24,14 @@ class _AddButtonState extends State<AddButton> {
   Uint8List? _file;
   final TextEditingController _mealController = TextEditingController();
   bool _isLoading = false;
+  static const List<String> list = <String>[
+    'Breakfast',
+    'Lunch',
+    'Dinner',
+    'Restaurants',
+    'Snacks',
+  ];
+  String dropdownValue = "";
 
   void postImage(String uid) async {
     setState(() {
@@ -40,7 +48,7 @@ class _AddButtonState extends State<AddButton> {
     } else {
       try {
         res = await FirestoreMethods().createFood(
-          widget.docMeal,
+          dropdownValue,
           _mealController.text,
           _file!,
           uid,
@@ -120,17 +128,27 @@ class _AddButtonState extends State<AddButton> {
   }
 
   @override
+  void initState() {
+    if (widget.docMeal.isEmpty) {
+      dropdownValue = "Breakfast";
+    } else {
+      dropdownValue = widget.docMeal;
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final AppUser user = Provider.of<UserProvider>(context).getUser;
 
     return AlertDialog(
-      content: _file == null
-          ? SizedBox(
-              height: 300,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
+      content: SizedBox(
+        height: 300,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _file == null
+                ? Expanded(
                     child: FittedBox(
                       fit: BoxFit.fill,
                       child: IconButton(
@@ -138,20 +156,8 @@ class _AddButtonState extends State<AddButton> {
                         icon: const Icon(Icons.photo),
                       ),
                     ),
-                  ),
-                  TextField(
-                    controller: _mealController,
-                    decoration: const InputDecoration(hintText: "Meal Name"),
-                  ),
-                ],
-              ),
-            )
-          : SizedBox(
-              height: 300,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
+                  )
+                : Expanded(
                     child: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -162,13 +168,35 @@ class _AddButtonState extends State<AddButton> {
                       ),
                     ),
                   ),
-                  TextField(
-                    controller: _mealController,
-                    decoration: const InputDecoration(hintText: "Meal Name"),
+            DropdownButton<String>(
+              value: dropdownValue,
+              iconSize: 0,
+              isExpanded: true,
+              onChanged: (String? value) {
+                setState(() {
+                  dropdownValue = value!;
+                });
+              },
+              items: list.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Center(
+                    child: Text(
+                      value,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ],
-              ),
+                );
+              }).toList(),
             ),
+            TextField(
+              controller: _mealController,
+              textAlign: TextAlign.center,
+              decoration: const InputDecoration(hintText: "Meal Name"),
+            ),
+          ],
+        ),
+      ),
       actions: <Widget>[
         MaterialButton(
           child: const Text('CANCEL'),

@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mealselection/components/add_button.dart';
-import 'package:mealselection/resources/get_random_food.dart';
 import 'package:mealselection/utils/colors.dart';
+import 'package:mealselection/widgets/bottom_nav_bar.dart';
 import 'package:mealselection/widgets/food_card.dart';
 
 class MobileMealMenuScreen extends StatefulWidget {
@@ -37,19 +36,6 @@ class _MobileMealMenuScreenState extends State<MobileMealMenuScreen> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.home),
-            onPressed: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/home', (route) => false);
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.account_circle_rounded),
-            onPressed: () => Navigator.pushNamed(context, '/profile'),
-          ),
-        ],
       ),
       body: SafeArea(
         child: Column(
@@ -79,26 +65,6 @@ class _MobileMealMenuScreenState extends State<MobileMealMenuScreen> {
                     style: const TextStyle(
                       fontSize: 25,
                     ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    icon: const Icon(Icons.add),
-                    onPressed: () => showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AddButton(docMeal: widget.meal);
-                        }),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    icon: const Icon(Icons.refresh),
-                    onPressed: () {
-                      RandomFood().getRandomFoodAndGo(context, widget.meal);
-                    },
                   ),
                 ),
               ],
@@ -147,6 +113,7 @@ class _MobileMealMenuScreenState extends State<MobileMealMenuScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavBar(screenNumber: 2, meal: widget.meal),
     );
   }
 }

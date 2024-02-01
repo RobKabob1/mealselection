@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mealselection/resources/get_random_food.dart';
 import 'package:mealselection/utils/colors.dart';
+import 'package:mealselection/widgets/bottom_nav_bar.dart';
 
 class WebHomeScreen extends StatefulWidget {
   final String title;
@@ -37,10 +38,6 @@ class _WebHomeScreenState extends State<WebHomeScreen> {
                       onPressed: () {
                         Navigator.pushNamed(context, '/onboarding');
                       },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.account_circle_rounded),
-                      onPressed: () => Navigator.pushNamed(context, '/profile'),
                     ),
                   ],
                 ),
@@ -154,6 +151,7 @@ class _WebHomeScreenState extends State<WebHomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                const BottomNavBar(screenNumber: 0, meal: ''),
               ],
             ),
           ),
