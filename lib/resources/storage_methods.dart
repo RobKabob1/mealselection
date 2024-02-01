@@ -9,13 +9,13 @@ class StorageMethods {
 
   //adding image to firebase storage
   Future<String> uploadImageToStorage(
-      String childName, Uint8List file, bool isPost) async {
+      String childName, Uint8List file, bool isFood) async {
     Reference ref =
         _storage.ref().child(childName).child(_auth.currentUser!.email!);
 
-    //if it's a post (and not a profile pic), generate a unique ID for the post
-    //and the name of the post is this unique id
-    if (isPost) {
+    //if it's a food (and not a profile pic), generate a unique ID for the food
+    //and the name of the food is this unique id
+    if (isFood) {
       String id = const Uuid().v1();
       ref = ref.child(id);
     }

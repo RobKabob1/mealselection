@@ -39,7 +39,7 @@ class _AddButtonState extends State<AddButton> {
       showSnackBar(res, context);
     } else {
       try {
-        res = await FirestoreMethods().uploadFood(
+        res = await FirestoreMethods().createFood(
           widget.docMeal,
           _mealController.text,
           _file!,
@@ -48,7 +48,7 @@ class _AddButtonState extends State<AddButton> {
 
         if (res == "success") {
           setState(() {});
-          showSnackBar('Posted!', context);
+          showSnackBar('Added food!', context);
           clearImage();
         } else {
           setState(() {});
@@ -69,7 +69,7 @@ class _AddButtonState extends State<AddButton> {
         context: context,
         builder: (context) {
           return SimpleDialog(
-            title: const Text('Create a post'),
+            title: const Text('Choose a picture'),
             children: [
               SimpleDialogOption(
                 padding: const EdgeInsets.all(20),

@@ -90,10 +90,18 @@ class _FoodCardState extends State<FoodCard> {
                 ),
               ),
             ),
-            EditButton(
-              function: "Edit",
-              docID: widget.snap['foodId'],
-              docText: widget.snap['foodName'],
+            IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) {
+                    return EditButton(
+                      function: "Edit",
+                      foodId: widget.snap['foodId'],
+                      foodName: widget.snap['foodName'],
+                      foodUrl: widget.snap['foodUrl'],
+                    );
+                  }),
             ),
             IconButton(
               onPressed: () {

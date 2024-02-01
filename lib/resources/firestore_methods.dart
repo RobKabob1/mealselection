@@ -9,7 +9,7 @@ class FirestoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   //upload post
-  Future<String> uploadFood(
+  Future<String> createFood(
     String meal,
     String foodName,
     Uint8List file,
@@ -43,7 +43,7 @@ class FirestoreMethods {
     return res;
   }
 
-  Future<String> editFoodName(
+  Future<String> updateFoodName(
     String foodId,
     String foodName,
   ) async {
@@ -57,6 +57,64 @@ class FirestoreMethods {
           .update({
         'foodName': foodName,
       });
+      res = "success";
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
+  Future<String> updatePicture(
+    Uint8List file,
+    String foodId,
+    String oldfoodUrl,
+  ) async {
+    String res = "some error occurred";
+    try {
+      //add image to firebase storage
+      String foodNewUrl =
+          await StorageMethods().uploadImageToStorage('food', file, true);
+      //update reference to it in the doc
+      await _firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('food')
+          .doc(foodId)
+          .update({
+        'foodUrl': foodNewUrl,
+      });
+      //delete the old image
+      await StorageMethods().deleteImageInStorage(oldfoodUrl);
+      res = "success";
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
+  Future<String> updateNameAndPicture(
+    Uint8List file,
+    String foodId,
+    String foodName,
+    String oldfoodUrl,
+  ) async {
+    String res = "some error occurred";
+    try {
+      //add image to firebase storage
+      String foodNewUrl =
+          await StorageMethods().uploadImageToStorage('food', file, true);
+      //update reference to it in the doc
+      await _firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('food')
+          .doc(foodId)
+          .update({
+        'foodName': foodName,
+        'foodUrl': foodNewUrl,
+      });
+      //delete the old image
+      await StorageMethods().deleteImageInStorage(oldfoodUrl);
       res = "success";
     } catch (err) {
       res = err.toString();
