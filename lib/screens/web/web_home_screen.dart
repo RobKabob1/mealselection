@@ -151,13 +151,13 @@ class _WebHomeScreenState extends State<WebHomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const BottomNavBar(screenNumber: 0, meal: ''),
               ],
             ),
           ),
           Flexible(child: Container()),
         ],
       ),
+      bottomNavigationBar: const BottomNavBar(screenNumber: 0, meal: ''),
     );
   }
 }
