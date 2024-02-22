@@ -117,6 +117,7 @@ class _WebMealMenuScreenState extends State<WebMealMenuScreen> {
                       },
                     ),
                   ),
+                  BottomNavBar(screenNumber: 2, meal: widget.meal),
                 ],
               ),
             ),
@@ -124,7 +125,6 @@ class _WebMealMenuScreenState extends State<WebMealMenuScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBar(screenNumber: 2, meal: widget.meal),
     );
   }
 }

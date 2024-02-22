@@ -261,13 +261,13 @@ class _WebUserProfileScreenState extends State<WebUserProfileScreen> {
                           );
                         },
                       ),
+                      const BottomNavBar(screenNumber: 3, meal: ''),
                     ],
                   ),
                 ),
                 Flexible(child: Container()),
               ],
             ),
-      bottomNavigationBar: const BottomNavBar(screenNumber: 3, meal: ''),
     );
   }
 
