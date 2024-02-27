@@ -1,6 +1,6 @@
 # Meal Selection
 
-[![Meal Selection](https://github.com/RobKabob1/mealselection/blob/main/images/icons/appstorefeaturegraphic.png?raw=true)](https://mealselection.web.app/)
+[![Meal Selection](https://github.com/RobKabob1/mealselection/blob/main/images/icons/github-feature-graphic.png?raw=true)](https://mealselection.web.app/)
 
 ## Project Description
 
