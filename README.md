@@ -18,6 +18,7 @@ The general platform status for the application is available [here](https://stat
 - [Setting Up the Project](#setting-up-the-project)
 - [Understanding the Project](#setting-up-the-project)
 - [Reporting Bugs and Issues](#reporting-bugs-and-issues)
+- [License](#license)
 
 ### Tech Stack
 
@@ -46,3 +47,9 @@ Firebase | for Authentication, Firestore Database, and Storage
 ### Reporting Bugs and Issues
 
 If you think you've found a bug, go ahead and create a new GitHub issue. Be sure to include as much information as possible so we can reproduce the bug. Bonus points go to people that include screenshots!
+
+### License
+
+The content of this repository is bound by the following licenses:
+
+- The computer software is licensed under the [MIT License](LICENSE.md).
