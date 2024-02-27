@@ -6,7 +6,7 @@
 
 [Meal Selection](https://mealselection.web.app) is a mobile and web app created with the Flutter framework. It was the first mobile app published on the Google Play Store and Android App Store by [Step Pay LLC](https://steppay.tech). 
 
-<a href="https://apps.apple.com/us/app/meal-selection/id6476314305">    <img src="https://github.com/RobKabob1/mealselection/blob/main/images/icons/apple-app-store.png?raw=true" width="200" />    </a><a href="https://play.google.com/store/apps/details?id=tech.steppay.mealselection&pli=1"><img src="https://github.com/RobKabob1/mealselection/blob/main/images/icons/google-play-store.png?raw=true" width="205" /></a>
+<a href="https://apps.apple.com/us/app/meal-selection/id6476314305?platform=iphone">    <img src="https://github.com/RobKabob1/mealselection/blob/main/images/icons/apple-app-store.png?raw=true" width="200" />    </a><a href="https://play.google.com/store/apps/details?id=tech.steppay.mealselection&pli=1"><img src="https://github.com/RobKabob1/mealselection/blob/main/images/icons/google-play-store.png?raw=true" width="205" /></a>
 
 ## Table of Contents
 
