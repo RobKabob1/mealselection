@@ -45,6 +45,7 @@ dependencies:
   firebase_core: ^2.24.2
   flutter_launcher_icons: ^0.13.1
   introduction_screen: ^3.1.12
+  jumping_dot: ^0.0.6
 
 
 dev_dependencies:
