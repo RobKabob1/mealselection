@@ -2,6 +2,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jumping_dot/jumping_dot.dart';
 import 'package:mealselection/models/user.dart';
 import 'package:mealselection/providers/user_provider.dart';
 import 'package:mealselection/resources/firestore_methods.dart';
@@ -142,6 +143,7 @@ class _AddButtonState extends State<AddButton> {
     final AppUser user = Provider.of<UserProvider>(context).getUser;
 
     return AlertDialog(
+      actionsAlignment: MainAxisAlignment.spaceEvenly,
       content: SizedBox(
         height: 300,
         child: Column(
@@ -197,8 +199,9 @@ class _AddButtonState extends State<AddButton> {
           ],
         ),
       ),
-      actions: <Widget>[
+      actions: [
         MaterialButton(
+          color: mobileBackgroundColor,
           child: const Text('CANCEL'),
           onPressed: () {
             Navigator.pop(context);
@@ -210,12 +213,22 @@ class _AddButtonState extends State<AddButton> {
         ),
         _isLoading
             ? MaterialButton(
-                child: const CircularProgressIndicator(
-                  color: primaryColor,
+                color: mobileBackgroundColor,
+                child: SizedBox(
+                  height: 30,
+                  width: 50,
+                  child: Center(
+                    child: JumpingDots(
+                      color: primaryColor,
+                      numberOfDots: 3,
+                      verticalOffset: 5,
+                    ),
+                  ),
                 ),
                 onPressed: () {},
               )
             : MaterialButton(
+                color: mobileBackgroundColor,
                 child: const Text('OK'),
                 onPressed: () {
                   postImage(user.uid);
