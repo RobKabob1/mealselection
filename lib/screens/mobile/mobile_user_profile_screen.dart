@@ -28,7 +28,7 @@ class _MobileUserProfileScreenState extends State<MobileUserProfileScreen> {
     getData();
   }
 
-  getData() async {
+  Future<void> getData() async {
     setState(() {
       isLoading = true;
     });

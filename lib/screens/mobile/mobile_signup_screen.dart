@@ -31,7 +31,7 @@ class _MobileSignUpScreenState extends State<MobileSignUpScreen> {
     _usernameController.dispose();
   }
 
-  _selectImage(BuildContext context) async {
+  Future<Future> _selectImage(BuildContext context) async {
     return showDialog(
         context: context,
         builder: (context) {

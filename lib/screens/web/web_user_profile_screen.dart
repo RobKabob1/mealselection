@@ -27,7 +27,7 @@ class _WebUserProfileScreenState extends State<WebUserProfileScreen> {
     getData();
   }
 
-  getData() async {
+  Future<void> getData() async {
     setState(() {
       isLoading = true;
     });

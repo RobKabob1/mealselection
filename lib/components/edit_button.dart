@@ -99,7 +99,7 @@ class _EditButtonState extends State<EditButton> {
     });
   }
 
-  _selectImage(BuildContext context) async {
+  Future<Future> _selectImage(BuildContext context) async {
     return showDialog(
         context: context,
         builder: (context) {
